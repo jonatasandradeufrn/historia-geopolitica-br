@@ -321,6 +321,67 @@ body {
     box-shadow: 0 5px 15px rgba(0, 156, 59, 0.4);
 }
 
+/* Global hub cards */
+.global-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0 20px;
+}
+
+.global-card {
+    background: var(--branco);
+    border-radius: 12px;
+    padding: 35px 25px 25px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.global-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.global-card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.global-card h2 {
+    font-size: 1.3rem;
+    color: var(--azul);
+    margin-bottom: 12px;
+}
+
+.global-card p {
+    font-size: 0.9rem;
+    color: var(--texto-claro);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.global-card-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    border-radius: 25px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transicao);
+}
+
+.global-card:hover .global-card-btn {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
 /* Footer */
 .footer {
     background: var(--azul);
@@ -945,6 +1006,20 @@ body {
     font-size: 0.7rem;
     font-weight: 700;
     flex-shrink: 0;
+}
+
+.geo-muni-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 15px;
+    padding: 6px 15px 8px;
+    font-size: 0.78rem;
+    color: var(--texto-claro);
+    border-top: 1px solid #f0f0f0;
+}
+
+.geo-muni-info span {
+    white-space: nowrap;
 }
 
 .muni-cargos-details {

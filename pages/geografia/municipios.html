@@ -14,14 +14,9 @@
     <div class="container header-inner">
         <h1><a href="../../index.html"><span>📜</span> História do Brasil</a></h1>
         <nav class="header-nav">
-            <a href="../../index.html#colonial">Colônia</a>
-            <a href="../../index.html#imperio">Império</a>
-            <a href="../../index.html#republica-velha">Rep. Velha</a>
-            <a href="../../index.html#vargas">Vargas</a>
-            <a href="../../index.html#populista">Populista</a>
-            <a href="../../index.html#ditadura">Ditadura</a>
-            <a href="../../index.html#nova-republica">Nova República</a>
+            <a href="../../pages/historia/index.html">História</a>
             <a href="index.html" style="background:var(--amarelo);color:var(--azul-escuro);">Geografia</a>
+            <a href="../../pages/geopolitica/index.html">Geopolítica</a>
         </nav>
     </div>
 </header>
@@ -30,7 +25,7 @@
     <div class="container">
         <h1>Municípios do Brasil</h1>
         <span class="periodo">5.570 municípios</span>
-        <p style="margin-top:15px;max-width:600px;margin-left:auto;margin-right:auto;opacity:0.9;">Busque por nome ou filtre por estado/região. Para dados populacionais oficiais, <strong>consulte o IBGE</strong></p>
+        <p style="margin-top:15px;max-width:600px;margin-left:auto;margin-right:auto;opacity:0.9;">Busque por nome ou filtre por estado/região. Dados populacionais do Censo IBGE 2022. Clique no card para ver custos políticos.</p>
     </div>
 </section>
 
@@ -68,8 +63,9 @@
 <footer class="footer">
     <div class="container">
         <p><strong>Municípios do Brasil</strong></p>
+        <p><strong>Municípios do Brasil</strong></p>
         <p>Consulte o IBGE para dados oficiais | Última atualização: Junho de 2026</p>
-        <p><a href="../../index.html">← Voltar à Linha do Tempo</a></p>
+        <p><a href="../../index.html">← Voltar ao Início</a></p>
     </div>
 </footer>
 
@@ -125,17 +121,23 @@ document.addEventListener('DOMContentLoaded', function() {
         var start = (currentPage - 1) * PER_PAGE;
         var page = filtered.slice(start, start + PER_PAGE);
 
-        var html = '';
+            var html = '';
         for (var i = 0; i < page.length; i++) {
             var m = page[i];
+            var pop = m.pop || 0;
             var ver = m.ver || 15;
             var custoMes = SAL_PREF + SAL_VICE_PREF + SAL_VER * ver;
             var custoAno = custoMes * 13.33;
-            html += '<div class="geo-muni-card">'
+            html += '<div class="geo-muni-card" style="border-left:4px solid ' + (UF_CORES[m.uf] || '#999') + '">'
                 + '<div class="geo-muni-header" onclick="var d=this.parentNode.querySelector(\'.muni-cargos-details\');if(d)d.open=!d.open;">'
                 + '<span class="geo-muni-nome">' + m.n + '</span>'
                 + '<span class="geo-muni-uf" style="background:' + (UF_CORES[m.uf] || '#999') + '">' + m.uf + '</span>'
                 + '<span class="geo-custo-badge">💰 R$ ' + fmtDin(custoMes) + '/mês</span>'
+                + '</div>'
+                + '<div class="geo-muni-info">'
+                + '<span><strong>População:</strong> ' + (pop > 0 ? formatNum(pop) : 'N/D') + ' (Censo 2022)</span>'
+                + '<span><strong>Região:</strong> ' + m.reg + '</span>'
+                + '<span><strong>Código IBGE:</strong> ' + m.cod + '</span>'
                 + '</div>'
                 + '<details class="muni-cargos-details cargos-details"><summary>Políticos e custos</summary>'
                 + '<table class="cargos-tabela-mini">'
@@ -147,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 + '<div class="cargos-desc" style="border:none;padding:0;margin-top:5px;">'
                 + '<div class="cargos-desc-item"><strong>Prefeito</strong><p>Chefe do Poder Executivo municipal. Administra a cidade, executa leis e serviços públicos. Deve prestar contas ao TCM. Foro no TJ.</p></div>'
                 + '<div class="cargos-desc-item"><strong>Vereadores</strong><p>Integram a Câmara Municipal. Legislam sobre interesse local, fiscalizam o prefeito, aprovam orçamento. Inviolabilidade no exercício do mandato.</p></div>'
-                + '<p class="geo-fonte">Salários são estimativas baseadas em médias nacionais — consulte dados oficiais. Vereadores: ' + ver + ' (CF Art. 29 conforme população).</p>'
+                + '<p class="geo-fonte">Salários são estimativas baseadas em médias nacionais — consulte dados oficiais. Vereadores: ' + ver + ' (CF Art. 29 conforme população). Fonte população: IBGE Censo 2022.</p>'
                 + '</div></details></div>';
         }
         document.getElementById('muniContainer').innerHTML = html;

@@ -1,0 +1,27 @@
+﻿DF -> Bandeira do Distrito Federal (Brasil).svg
+PR -> Bandeira do Paranß.svg
+SP -> Bandeira do estado de SÒo Paulo.svg
+PB -> Bandeira da ParaÝba.svg
+MG -> Bandeira de Minas Gerais.svg
+PA -> Bandeira do Parß.svg
+RS -> Bandeira do Rio Grande do Sul.svg
+AM -> Bandeira do Amazonas.svg
+CE -> Bandeira do Cearß.svg
+AP -> Bandeira do Amapß.svg
+BA -> Bandeira da Bahia.svg
+AC -> Bandeira do Acre.svg
+AL -> Bandeira de Alagoas.svg
+PE -> Bandeira de Pernambuco.svg
+SC -> Bandeira de Santa Catarina.svg
+RJ -> Bandeira do estado do Rio de Janeiro.svg
+GO -> Flag of Goißs.svg
+MA -> Bandeira do MaranhÒo.svg
+RR -> Bandeira de Roraima.svg
+PI -> Bandeira do PiauÝ.svg
+MT -> Bandeira de Mato Grosso.svg
+ES -> Bandeira do EspÝrito Santo.svg
+RO -> Bandeira de Rond¶nia.svg
+RN -> Bandeira do Rio Grande do Norte.svg
+MS -> Bandeira de Mato Grosso do Sul.svg
+TO -> Bandeira do Tocantins.svg
+SE -> Bandeira de Sergipe.svg

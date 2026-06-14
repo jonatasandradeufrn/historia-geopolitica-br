@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A história completa do Brasil em uma linha do tempo interativa. Do descobrimento aos dias atuais, todos os fatos históricos organizados por período.">
-    <title>Linha do Tempo - História do Brasil</title>
+    <meta name="description" content="História, Geografia e Geopolítica do Brasil - Explore o Brasil completo">
+    <title>História do Brasil - Geografia - Geopolítica</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇧🇷</text></svg>">
 </head>
@@ -14,293 +14,52 @@
     <div class="container header-inner">
         <h1><a href="index.html"><span>📜</span> História do Brasil</a></h1>
         <nav class="header-nav">
-            <a href="#colonial">Colônia</a>
-            <a href="#imperio">Império</a>
-            <a href="#republica-velha">Rep. Velha</a>
-            <a href="#vargas">Vargas</a>
-            <a href="#populista">Populista</a>
-            <a href="#ditadura">Ditadura</a>
-            <a href="#nova-republica">Nova República</a>
+            <a href="pages/historia/index.html" style="background:var(--verde);color:#fff;">História</a>
             <a href="pages/geografia/index.html" style="background:var(--amarelo);color:var(--azul-escuro);">Geografia</a>
+            <a href="pages/geopolitica/index.html" style="background:var(--azul);color:#fff;">Geopolítica</a>
         </nav>
     </div>
 </header>
 
 <main class="container">
-    <section style="text-align:center;padding:40px 0 20px;">
-        <h1 style="font-size:2.2rem;color:var(--azul);margin-bottom:10px;">Linha do Tempo</h1>
-        <p style="color:var(--texto-claro);max-width:600px;margin:0 auto;">Navegue por mais de 500 anos de história brasileira. Clique em cada período para explorar os detalhes.</p>
+    <section style="text-align:center;padding:60px 0 30px;">
+        <h1 style="font-size:2.5rem;color:var(--azul);margin-bottom:15px;">Brasil Completo</h1>
+        <p style="color:var(--texto-claro);max-width:550px;margin:0 auto;font-size:1.05rem;">Explore a história, a geografia e a geopolítica do Brasil em um só lugar.</p>
     </section>
 
-    <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Buscar eventos históricos...">
+    <div class="global-cards">
+        <a href="pages/historia/index.html" class="global-card" style="border-top:5px solid var(--verde);">
+            <div class="global-card-icon">📜</div>
+            <h2>História do Brasil</h2>
+            <p>Linha do tempo interativa do descobrimento aos dias atuais. Colônia, Império, República, Vargas, Ditadura e Nova República em uma narrativa completa.</p>
+            <span class="global-card-btn" style="background:var(--verde);">Explorar História →</span>
+        </a>
+        <a href="pages/geografia/index.html" class="global-card" style="border-top:5px solid var(--azul);">
+            <div class="global-card-icon">🌎</div>
+            <h2>Geografia do Brasil</h2>
+            <p>Dados completos do Brasil, 26 estados + DF, e 5.570 municípios. População, área, PIB, IDH, cargos políticos, bandeiras e muito mais.</p>
+            <span class="global-card-btn" style="background:var(--azul);">Explorar Geografia →</span>
+        </a>
+        <a href="pages/geopolitica/index.html" class="global-card" style="border-top:5px solid #1565C0;">
+            <div class="global-card-icon">🌐</div>
+            <h2>Geopolítica</h2>
+            <p>Relações internacionais, política externa brasileira, fronteiras, blocos econômicos, questões ambientais globais e análises geopolíticas.</p>
+            <span class="global-card-btn" style="background:#1565C0;">Explorar Geopolítica →</span>
+        </a>
     </div>
 
-    <div class="filters">
-        <button class="filter-btn active" data-era="all">Todos</button>
-        <button class="filter-btn" data-era="colonial">Colônia (1500-1822)</button>
-        <button class="filter-btn" data-era="imperio">Império (1822-1889)</button>
-        <button class="filter-btn" data-era="republica-velha">Rep. Velha (1889-1930)</button>
-        <button class="filter-btn" data-era="vargas">Era Vargas (1930-1945)</button>
-        <button class="filter-btn" data-era="populista">Rep. Populista (1945-1964)</button>
-        <button class="filter-btn" data-era="ditadura">Ditadura (1964-1985)</button>
-        <button class="filter-btn" data-era="nova-rep">Nova República (1985-hoje)</button>
-    </div>
-
-    <p id="resultCount" class="result-count"></p>
-
-    <div class="timeline">
-
-        <!-- ============================================ -->
-        <!-- BRASIL COLÔNIA -->
-        <!-- ============================================ -->
-        <section class="era-section" id="colonial">
-            <div class="era-marker">
-                <div class="era-circle">C</div>
-                <span class="era-date">1500 - 1822</span>
-            </div>
-
-            <div class="era-card reveal" data-era="colonial">
-                <span class="era-badge colonia">Brasil Colônia</span>
-                <h2 class="era-title"><a href="pages/colonial.html">Brasil Colônia (1500-1822)</a></h2>
-                <p class="era-subtitle">322 anos de colonização portuguesa</p>
-                <p class="era-description">Período que se inicia com a chegada dos portugueses ao Brasil e se estende até a Independência. Compreende a exploração do pau-brasil, o ciclo do açúcar, as invasões estrangeiras, a expansão bandeirante, a mineração, as revoltas coloniais e a chegada da Família Real Portuguesa.</p>
-                <ul class="event-list">
-                    <li><a href="pages/colonial.html#descobrimento">Descobrimento (1500)</a></li>
-                    <li><a href="pages/colonial.html#capitanias">Capitanias Hereditárias</a></li>
-                    <li><a href="pages/colonial.html#governo-geral">Governo-Geral</a></li>
-                    <li><a href="pages/colonial.html#ciclo-acucar">Ciclo do Açúcar</a></li>
-                    <li><a href="pages/colonial.html#invasoes">Invasões Holandesas</a></li>
-                    <li><a href="pages/colonial.html#bandeirantes">Bandeirantes</a></li>
-                    <li><a href="pages/colonial.html#ciclo-ouro">Ciclo do Ouro</a></li>
-                    <li><a href="pages/colonial.html#inconfidencia">Inconfidência Mineira</a></li>
-                    <li><a href="pages/colonial.html#familia-real">Família Real no Brasil</a></li>
-                    <li><a href="pages/colonial.html#revolucao-1817">Revolução Pernambucana de 1817</a></li>
-                    <li><a href="pages/colonial.html#reino-unido">Brasil Reino Unido</a></li>
-                </ul>
-                <a href="pages/colonial.html" class="btn-saiba-mais">Explorar Período</a>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- BRASIL IMPÉRIO -->
-        <!-- ============================================ -->
-        <section class="era-section" id="imperio">
-            <div class="era-marker">
-                <div class="era-circle">I</div>
-                <span class="era-date">1822 - 1889</span>
-            </div>
-
-            <div class="era-card reveal" data-era="imperio">
-                <span class="era-badge imperio">Brasil Império</span>
-                <h2 class="era-title"><a href="pages/imperio.html">Brasil Império (1822-1889)</a></h2>
-                <p class="era-subtitle">67 anos de monarquia no Brasil</p>
-                <p class="era-description">Período que vai da Independência à Proclamação da República. Abrange o Primeiro Reinado de Dom Pedro I, o turbulento Período Regencial com suas diversas revoltas, e o Segundo Reinado de Dom Pedro II, marcado pelo ciclo do café, a Guerra do Paraguai e a abolição da escravatura.</p>
-                <ul class="event-list">
-                    <li><a href="pages/imperio.html#independencia">Independência do Brasil (1822)</a></li>
-                    <li><a href="pages/imperio.html#primeiro-reinado">Primeiro Reinado</a></li>
-                    <li><a href="pages/imperio.html#periodo-regencial">Período Regencial</a></li>
-                    <li><a href="pages/imperio.html#cabanagem">Cabanagem</a></li>
-                    <li><a href="pages/imperio.html#farroupilha">Guerra dos Farrapos</a></li>
-                    <li><a href="pages/imperio.html#balaiada">Balaiada</a></li>
-                    <li><a href="pages/imperio.html#sabinada">Sabinada</a></li>
-                    <li><a href="pages/imperio.html#males">Revolta dos Malês</a></li>
-                    <li><a href="pages/imperio.html#segundo-reinado">Segundo Reinado</a></li>
-                    <li><a href="pages/imperio.html#cafe">Ciclo do Café</a></li>
-                    <li><a href="pages/imperio.html#guerra-paraguai">Guerra do Paraguai</a></li>
-                    <li><a href="pages/imperio.html#questao-religiosa">Questão Religiosa</a></li>
-                    <li><a href="pages/imperio.html#abolicao">Abolição da Escravatura</a></li>
-                    <li><a href="pages/imperio.html#proclamacao">Proclamação da República</a></li>
-                </ul>
-                <a href="pages/imperio.html" class="btn-saiba-mais">Explorar Período</a>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- REPÚBLICA VELHA -->
-        <!-- ============================================ -->
-        <section class="era-section" id="republica-velha">
-            <div class="era-marker">
-                <div class="era-circle">RV</div>
-                <span class="era-date">1889 - 1930</span>
-            </div>
-
-            <div class="era-card reveal" data-era="republica-velha">
-                <span class="era-badge republica-velha">República Velha</span>
-                <h2 class="era-title"><a href="pages/republica-velha.html">República Velha (1889-1930)</a></h2>
-                <p class="era-subtitle">41 anos da Primeira República</p>
-                <p class="era-description">Período que se inicia com a Proclamação da República e vai até a Revolução de 1930. Marcado pela República da Espada, política do café-com-leite, coronelismo, e diversas revoltas populares e tenentistas.</p>
-                <ul class="event-list">
-                    <li><a href="pages/republica-velha.html#republica-espada">República da Espada</a></li>
-                    <li><a href="pages/republica-velha.html#cafe-leite">Política Café-com-Leite</a></li>
-                    <li><a href="pages/republica-velha.html#canudos">Guerra de Canudos</a></li>
-                    <li><a href="pages/republica-velha.html#revolta-vacina">Revolta da Vacina</a></li>
-                    <li><a href="pages/republica-velha.html#revolta-chibata">Revolta da Chibata</a></li>
-                    <li><a href="pages/republica-velha.html#cangaco">Cangaço</a></li>
-                    <li><a href="pages/republica-velha.html#greve-1917">Greve Geral de 1917</a></li>
-                    <li><a href="pages/republica-velha.html#semana-22">Semana de Arte Moderna</a></li>
-                    <li><a href="pages/republica-velha.html#tenentismo">Tenentismo</a></li>
-                    <li><a href="pages/republica-velha.html#coluna-prestes">Coluna Prestes</a></li>
-                    <li><a href="pages/republica-velha.html#revolucao-1930">Revolução de 1930</a></li>
-                </ul>
-                <a href="pages/republica-velha.html" class="btn-saiba-mais">Explorar Período</a>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- ERA VARGAS -->
-        <!-- ============================================ -->
-        <section class="era-section" id="vargas">
-            <div class="era-marker">
-                <div class="era-circle">V</div>
-                <span class="era-date">1930 - 1945</span>
-            </div>
-
-            <div class="era-card reveal" data-era="vargas">
-                <span class="era-badge vargas">Era Vargas</span>
-                <h2 class="era-title"><a href="pages/era-vargas.html">Era Vargas (1930-1945)</a></h2>
-                <p class="era-subtitle">15 anos de governo de Getúlio Vargas</p>
-                <p class="era-description">Período em que Getúlio Vargas governou o Brasil, primeiro como chefe do Governo Provisório, depois como presidente constitucional e finalmente como ditador do Estado Novo. Marcado pela industrialização, criação de leis trabalhistas e participação na Segunda Guerra Mundial.</p>
-                <ul class="event-list">
-                    <li><a href="pages/era-vargas.html#governo-provisorio">Governo Provisório</a></li>
-                    <li><a href="pages/era-vargas.html#anl-aib">ANL vs AIB</a></li>
-                    <li><a href="pages/era-vargas.html#intentona">Intentona Comunista</a></li>
-                    <li><a href="pages/era-vargas.html#estado-novo">Estado Novo</a></li>
-                    <li><a href="pages/era-vargas.html#clt">Criação da CLT</a></li>
-                    <li><a href="pages/era-vargas.html#feb">Brasil na Segunda Guerra</a></li>
-                    <li><a href="pages/era-vargas.html#fim-estado-novo">Queda do Estado Novo</a></li>
-                </ul>
-                <a href="pages/era-vargas.html" class="btn-saiba-mais">Explorar Período</a>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- REPÚBLICA POPULISTA -->
-        <!-- ============================================ -->
-        <section class="era-section" id="populista">
-            <div class="era-marker">
-                <div class="era-circle">RP</div>
-                <span class="era-date">1945 - 1964</span>
-            </div>
-
-            <div class="era-card reveal" data-era="populista">
-                <span class="era-badge populista">República Populista</span>
-                <h2 class="era-title"><a href="pages/republica-populista.html">República Populista (1945-1964)</a></h2>
-                <p class="era-subtitle">19 anos de democracia e desenvolvimento</p>
-                <p class="era-description">Período democrático entre o Estado Novo e o Golpe Militar. Marcado pelos governos de Dutra, Vargas (suicídio), JK (construção de Brasília), Jânio Quadros e João Goulart, com intensa mobilização social e crise política.</p>
-                <ul class="event-list">
-                    <li><a href="pages/republica-populista.html#governo-dutra">Governo Dutra</a></li>
-                    <li><a href="pages/republica-populista.html#governo-vargas">Governo Vargas (1951-54)</a></li>
-                    <li><a href="pages/republica-populista.html#suicidio-vargas">Suicídio de Getúlio Vargas</a></li>
-                    <li><a href="pages/republica-populista.html#governo-jk">Governo JK</a></li>
-                    <li><a href="pages/republica-populista.html#brasilia">Construção de Brasília</a></li>
-                    <li><a href="pages/republica-populista.html#governo-janio">Governo Jânio Quadros</a></li>
-                    <li><a href="pages/republica-populista.html#governo-jango">Governo João Goulart</a></li>
-                    <li><a href="pages/republica-populista.html#reformas-base">Reformas de Base</a></li>
-                    <li><a href="pages/republica-populista.html#golpe-1964">Golpe de 1964</a></li>
-                </ul>
-                <a href="pages/republica-populista.html" class="btn-saiba-mais">Explorar Período</a>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- DITADURA MILITAR -->
-        <!-- ============================================ -->
-        <section class="era-section" id="ditadura">
-            <div class="era-marker">
-                <div class="era-circle">D</div>
-                <span class="era-date">1964 - 1985</span>
-            </div>
-
-            <div class="era-card reveal" data-era="ditadura">
-                <span class="era-badge ditadura">Ditadura Militar</span>
-                <h2 class="era-title"><a href="pages/ditadura-militar.html">Ditadura Militar (1964-1985)</a></h2>
-                <p class="era-subtitle">21 anos de regime militar</p>
-                <p class="era-description">Período de regime autoritário instaurado pelo Golpe de 1964. Marcado por Atos Institucionais (AI-5), censura, repressão a opositores, Milagre Econômico, endividamento externo, guerrilhas e luta pela redemocratização com as Diretas Já.</p>
-                <ul class="event-list">
-                    <li><a href="pages/ditadura-militar.html#golpe-1964">Golpe Civil-Militar</a></li>
-                    <li><a href="pages/ditadura-militar.html#comandos">Comandos Militares</a></li>
-                    <li><a href="pages/ditadura-militar.html#ai-5">AI-5 (1968)</a></li>
-                    <li><a href="pages/ditadura-militar.html#milagre">Milagre Econômico</a></li>
-                    <li><a href="pages/ditadura-militar.html#guerrilha">Guerrilha do Araguaia</a></li>
-                    <li><a href="pages/ditadura-militar.html#resistencia">Movimentos de Resistência</a></li>
-                    <li><a href="pages/ditadura-militar.html#distensao">Distensão e Abertura</a></li>
-                    <li><a href="pages/ditadura-militar.html#diretas-ja">Diretas Já</a></li>
-                    <li><a href="pages/ditadura-militar.html#redemocratizacao">Redemocratização</a></li>
-                </ul>
-                <a href="pages/ditadura-militar.html" class="btn-saiba-mais">Explorar Período</a>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- NOVA REPÚBLICA -->
-        <!-- ============================================ -->
-        <section class="era-section" id="nova-republica">
-            <div class="era-marker">
-                <div class="era-circle">NR</div>
-                <span class="era-date">1985 - Hoje</span>
-            </div>
-
-            <div class="era-card reveal" data-era="nova-rep">
-                <span class="era-badge nova-rep">Nova República</span>
-                <h2 class="era-title"><a href="pages/nova-republica.html">Nova República (1985-hoje)</a></h2>
-                <p class="era-subtitle">Era democrática atual</p>
-                <p class="era-description">Período democrático que se inicia com o fim da ditadura militar. Abrange a Constituição de 1988, o impeachment de Collor, o Plano Real, os governos FHC, Lula, Dilma (impeachment), Temer, Bolsonaro e o terceiro governo Lula.</p>
-                <ul class="event-list">
-                    <li><a href="pages/nova-republica.html#transicao">Transição Democrática</a></li>
-                    <li><a href="pages/nova-republica.html#constituicao-1988">Constituição de 1988</a></li>
-                    <li><a href="pages/nova-republica.html#governo-collor">Governo Collor</a></li>
-                    <li><a href="pages/nova-republica.html#impeachment-collor">Impeachment de Collor</a></li>
-                    <li><a href="pages/nova-republica.html#governo-itamar">Governo Itamar Franco</a></li>
-                    <li><a href="pages/nova-republica.html#plano-real">Plano Real</a></li>
-                    <li><a href="pages/nova-republica.html#governo-fhc">Governo Fernando Henrique</a></li>
-                    <li><a href="pages/nova-republica.html#governo-lula">Governo Lula (2003-2010)</a></li>
-                    <li><a href="pages/nova-republica.html#governo-dilma">Governo Dilma Rousseff</a></li>
-                    <li><a href="pages/nova-republica.html#impeachment-dilma">Impeachment de Dilma</a></li>
-                    <li><a href="pages/nova-republica.html#governo-temer">Governo Michel Temer</a></li>
-                    <li><a href="pages/nova-republica.html#governo-bolsonaro">Governo Jair Bolsonaro</a></li>
-                    <li><a href="pages/nova-republica.html#governo-lula-3">Governo Lula (2023-atual)</a></li>
-                </ul>
-                <a href="pages/nova-republica.html" class="btn-saiba-mais">Explorar Período</a>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- GEOGRAFIA -->
-        <!-- ============================================ -->
-        <section class="era-section" id="geografia">
-            <div class="era-marker">
-                <div class="era-circle" style="background:var(--verde);border-color:var(--amarelo);">🌎</div>
-                <span class="era-date">Dados Geográficos</span>
-            </div>
-
-            <div class="era-card reveal" data-era="geografia">
-                <span class="era-badge nova-rep">Geografia</span>
-                <h2 class="era-title"><a href="pages/geografia/index.html">Geografia do Brasil</a></h2>
-                <p class="era-subtitle">População, área, PIB, IDH, estados e municípios</p>
-                <p class="era-description">Explore dados geográficos, demográficos e econômicos do Brasil, seus 26 estados, o Distrito Federal e os 5.570 municípios — com fontes oficiais do IBGE, PNUD e IPEA.</p>
-                <ul class="event-list">
-                    <li><a href="pages/geografia/brasil.html">Brasil</a></li>
-                    <li><a href="pages/geografia/estados.html">Estados</a></li>
-                    <li><a href="pages/geografia/municipios.html">Municípios</a></li>
-                </ul>
-                <a href="pages/geografia/index.html" class="btn-saiba-mais">Explorar Geografia</a>
-            </div>
-        </section>
-
+    <div class="page-nav" style="margin-top:10px;">
+        <span style="color:var(--texto-claro);font-size:0.9rem;">Navegue pelas seções acima ou use o menu no topo da página.</span>
     </div>
 </main>
 
 <footer class="footer">
     <div class="container">
-        <p><strong>Linha do Tempo - História do Brasil</strong></p>
-        <p>Um projeto de documentação histórica livre e aberta.</p>
-        <p>Todos os fatos são baseados em fontes históricas amplamente reconhecidas.</p>
-        <p style="margin-top:10px;"><a href="pages/geografia/index.html" style="color:var(--amarelo);">🌎 Geografia do Brasil</a></p>
+        <p><strong>História, Geografia e Geopolítica do Brasil</strong></p>
+        <p>Um projeto de documentação livre e aberta. Dados: IBGE, PNUD, IPEA.</p>
+        <p style="font-size:0.8rem;color:var(--texto-claro);">Última atualização: Junho de 2026</p>
     </div>
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>
