@@ -58,6 +58,21 @@
             <div class="geo-card-full" id="gastosBrasil"></div>
         </div>
 
+        <div class="geo-section" id="secaoGastosEstados" style="display:none;">
+            <h2 class="geo-section-title">Gastos Públicos por Estado (Saúde, Educação, Segurança)</h2>
+            <div class="geo-card-full" id="gastosEstadosBrasil"></div>
+        </div>
+
+        <div class="geo-section" id="secaoHinosEstados" style="display:none;">
+            <h2 class="geo-section-title">Hinos Estaduais</h2>
+            <div class="geo-card-full" id="hinosEstadosBrasil"></div>
+        </div>
+
+        <div class="geo-section" id="secaoHistoriaEstados" style="display:none;">
+            <h2 class="geo-section-title">História dos Estados</h2>
+            <div class="geo-card-full" id="historiaEstadosBrasil"></div>
+        </div>
+
         <div class="geo-fonte-nota">
             <p id="fonteNota"></p>
         </div>
@@ -82,6 +97,9 @@
 <script src="dados/brasil.js"></script>
 <script src="dados/cargos-desc.js"></script>
 <script src="dados/gastos.js"></script>
+<script src="dados/hinos-estaduais.js"></script>
+<script src="dados/historia-estados.js"></script>
+<script src="dados/estados.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const b = BRASIL;
@@ -112,8 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('biomasBrasil').innerHTML = b.biomas.map(bi => '<div class="geo-bioma-item"><strong>' + bi.nome + '</strong><span>' + bi.areaPct + '% do território</span></div>').join('') + '<p class="geo-fonte" style="margin-top:10px;grid-column:1/-1;">Fonte: ' + b.biomaFonte + '</p>';
 
-    const flagSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 504" style="width:300px;height:210px;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);background:#fff;"><rect width="720" height="504" fill="#009c3b"/><polygon points="360,36 684,252 360,468 36,252" fill="#ffcc00"/><circle cx="360" cy="252" r="150" fill="#002776"/><path d="M210,230 C310,290 410,290 510,230 C510,240 410,300 310,300 C210,300 210,240 210,230 Z" fill="#fff"/><text x="360" y="256" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#002776">Ordem e Progresso</text></svg>';
-    document.getElementById('bandeiraBrasil').innerHTML = '<div class="geo-band-wrap">' + flagSvg + '<div class="geo-band-desc">' + b.bandeira.descricao + '</div></div><div class="geo-band-detalhes"><p><strong>Verde:</strong> ' + b.bandeira.verde + '</p><p><strong>Amarelo:</strong> ' + b.bandeira.amarelo + '</p><p><strong>Azul:</strong> ' + b.bandeira.azul + '</p><p><strong>Branco:</strong> ' + b.bandeira.branco + '</p><p><strong>Estrelas:</strong> ' + b.bandeira.estrelas + '</p><p><strong>Lema:</strong> ' + b.bandeira.lema + '</p><p><strong>Adoção:</strong> ' + b.bandeira.adocao + '</p><p><strong>Criação:</strong> ' + b.bandeira.criador + '</p><p><strong>Desenho:</strong> ' + b.bandeira.desenho + '</p><p class="geo-fonte">Fonte: ' + b.bandeira.bandFonte + '</p></div>';
+    document.getElementById('bandeiraBrasil').innerHTML = '<div class="geo-band-wrap"><img src="img/bandeira-brasil.svg" alt="Bandeira do Brasil" style="width:300px;height:210px;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);background:#fff;"><div class="geo-band-desc">' + b.bandeira.descricao + '</div></div><div class="geo-band-detalhes"><p><strong>Verde:</strong> ' + b.bandeira.verde + '</p><p><strong>Amarelo:</strong> ' + b.bandeira.amarelo + '</p><p><strong>Azul:</strong> ' + b.bandeira.azul + '</p><p><strong>Branco:</strong> ' + b.bandeira.branco + '</p><p><strong>Estrelas:</strong> ' + b.bandeira.estrelas + '</p><p><strong>Lema:</strong> ' + b.bandeira.lema + '</p><p><strong>Adoção:</strong> ' + b.bandeira.adocao + '</p><p><strong>Criação:</strong> ' + b.bandeira.criador + '</p><p><strong>Desenho:</strong> ' + b.bandeira.desenho + '</p><p class="geo-fonte">Fonte: ' + b.bandeira.bandFonte + '</p></div>';
 
     document.getElementById('hinoBrasil').innerHTML = '<p><strong>Título:</strong> ' + b.hino.titulo + '</p><p><strong>Letra:</strong> ' + b.hino.letra + '</p><p><strong>Música:</strong> ' + b.hino.musica + '</p><p><strong>Adoção:</strong> ' + b.hino.adocao + '</p><pre class="hino-letra">' + b.hino.estrofes.join('\n\n') + '</pre><p class="geo-fonte">Fonte: ' + b.hino.hinoFonte + '</p>';
 
@@ -144,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
     + '</div></details>'
     + '<p class="geo-fonte" style="margin-top:10px;"><strong>*Custo Anual:</strong> salário × 13,33 (13 salários + ⅓ férias). <strong>Nota:</strong> ' + b.cargosFonteGeral + ' Valores não incluem verbas indenizatórias, gabinete, passagens, auxílio-moradia e demais benefícios.</p>';
 
+    var estados = typeof ESTADOS !== 'undefined' ? ESTADOS : [];
+
     var g = typeof GASTOS_PUBLICOS !== 'undefined' ? GASTOS_PUBLICOS.federal : null;
     if (g) {
         var totalFed = g.saude.valor + g.educacao.valor + g.seguranca.valor;
@@ -157,6 +176,72 @@ document.addEventListener('DOMContentLoaded', function() {
             + '<p class="geo-fonte">Ano: ' + g.ano + ' | Fonte: ' + g.fonte + '</p>';
     } else {
         document.getElementById('gastosBrasil').innerHTML = '<p class="geo-fonte">Dados de gastos públicos federais não disponíveis. Consulte SIGA Brasil/Senado Federal.</p>';
+    }
+
+    if (typeof GASTOS_PUBLICOS !== 'undefined' && GASTOS_PUBLICOS.estados) {
+        var gEstados = GASTOS_PUBLICOS.estados;
+        var estadosList = document.getElementById('gastosEstadosBrasil');
+        var secaoGastosEstados = document.getElementById('secaoGastosEstados');
+        if (estadosList) {
+            var rows = '';
+            var siglasOrdenadas = ['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO'];
+            for (var si = 0; si < siglasOrdenadas.length; si++) {
+                var s = siglasOrdenadas[si];
+                var est = null;
+                for (var ei = 0; ei < estados.length; ei++) { if (estados[ei].sigla === s) { est = estados[ei]; break; } }
+                var g = gEstados[s];
+                if (!g) continue;
+                var t = (g.saude.valor + g.educacao.valor + g.seguranca.valor);
+                rows += '<tr><td><a href="estado.html?uf=' + s + '">' + (est ? est.nome : s) + '</a></td>'
+                    + '<td class="cargos-num">R$ ' + g.saude.valor.toFixed(1) + ' bi</td>'
+                    + '<td class="cargos-num">R$ ' + g.educacao.valor.toFixed(1) + ' bi</td>'
+                    + '<td class="cargos-num">R$ ' + g.seguranca.valor.toFixed(1) + ' bi</td>'
+                    + '<td class="cargos-num"><strong>R$ ' + t.toFixed(1) + ' bi</strong></td></tr>';
+            }
+            estadosList.innerHTML = '<div style="max-height:400px;overflow-y:auto;"><table class="cargos-tabela"><thead><tr><th>Estado</th><th>Saúde</th><th>Educação</th><th>Segurança</th><th>Total</th></tr></thead><tbody>' + rows + '</tbody></table></div>'
+                + '<p class="geo-fonte">Fonte: Estimativas SICONFI/STN. Consulte fontes oficiais.</p>';
+            if (secaoGastosEstados) secaoGastosEstados.style.display = '';
+        }
+    }
+
+    if (typeof HINOS_ESTADUAIS !== 'undefined') {
+        var hinosList = document.getElementById('hinosEstadosBrasil');
+        var secaoHinos = document.getElementById('secaoHinosEstados');
+        if (hinosList) {
+            var hinosHtml = '<div class="geo-links-grid">';
+            var siglasOrd = ['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO'];
+            for (var hi = 0; hi < siglasOrd.length; hi++) {
+                var s2 = siglasOrd[hi];
+                var h = HINOS_ESTADUAIS[s2];
+                if (!h) continue;
+                var estadoNome = '';
+                for (var ej = 0; ej < estados.length; ej++) { if (estados[ej].sigla === s2) { estadoNome = estados[ej].nome; break; } }
+                hinosHtml += '<div class="geo-link-item"><a href="estado.html?uf=' + s2 + '#secaoHino"><img src="img/bandeiras/' + s2 + '.svg" alt="" style="width:24px;height:16px;vertical-align:middle;border-radius:2px;margin-right:6px;">' + estadoNome + '</a></div>';
+            }
+            hinosHtml += '</div>';
+            hinosList.innerHTML = hinosHtml;
+            if (secaoHinos) secaoHinos.style.display = '';
+        }
+    }
+
+    if (typeof HISTORIA_ESTADOS !== 'undefined') {
+        var histList = document.getElementById('historiaEstadosBrasil');
+        var secaoHist = document.getElementById('secaoHistoriaEstados');
+        if (histList) {
+            var histHtml = '<div class="geo-links-grid">';
+            var siglasOrd2 = ['AC','AL','AM','AP','BA','CE','DF','ES','GO','MA','MG','MS','MT','PA','PB','PE','PI','PR','RJ','RN','RO','RR','RS','SC','SE','SP','TO'];
+            for (var hi2 = 0; hi2 < siglasOrd2.length; hi2++) {
+                var s3 = siglasOrd2[hi2];
+                var hst = HISTORIA_ESTADOS[s3];
+                if (!hst) continue;
+                var estadoNome2 = '';
+                for (var ek = 0; ek < estados.length; ek++) { if (estados[ek].sigla === s3) { estadoNome2 = estados[ek].nome; break; } }
+                histHtml += '<div class="geo-link-item"><a href="estado.html?uf=' + s3 + '#secaoHistoria"><img src="img/bandeiras/' + s3 + '.svg" alt="" style="width:24px;height:16px;vertical-align:middle;border-radius:2px;margin-right:6px;">' + estadoNome2 + '</a></div>';
+            }
+            histHtml += '</div>';
+            histList.innerHTML = histHtml;
+            if (secaoHist) secaoHist.style.display = '';
+        }
     }
 
     document.getElementById('fonteNota').innerHTML = '<strong>Última atualização:</strong> ' + b.ultimaAtualizacao + ' | <strong>Observação:</strong> ' + b.observacao;

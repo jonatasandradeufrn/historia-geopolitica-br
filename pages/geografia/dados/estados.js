@@ -14,7 +14,7 @@ var ESTADOS = [
     renda:1274,
     gent:"acreano",
     instalacao:"1962 (15 de junho)",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:22,vereadores:248}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:22,vicePrefeitos:22,vereadores:248}
   },
   {
     sigla:"AL",
@@ -31,7 +31,7 @@ var ESTADOS = [
     renda:1496,
     gent:"alagoano",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:9,deputadosEstaduais:27,prefeitos:102,vereadores:1110}
+    cargos:{senadores:3,deputadosFederais:9,deputadosEstaduais:27,prefeitos:102,vicePrefeitos:102,vereadores:1110}
   },
   {
     sigla:"AM",
@@ -48,7 +48,7 @@ var ESTADOS = [
     renda:1871,
     gent:"amazonense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:62,vereadores:758}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:62,vicePrefeitos:62,vereadores:758}
   },
   {
     sigla:"AP",
@@ -65,7 +65,7 @@ var ESTADOS = [
     renda:1598,
     gent:"amapaense",
     instalacao:"1988 (5 de outubro)",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:16,vereadores:176}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:16,vicePrefeitos:16,vereadores:176}
   },
   {
     sigla:"BA",
@@ -82,7 +82,7 @@ var ESTADOS = [
     renda:1760,
     gent:"baiano",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:39,deputadosEstaduais:63,prefeitos:417,vereadores:4609}
+    cargos:{senadores:3,deputadosFederais:39,deputadosEstaduais:63,prefeitos:417,vicePrefeitos:417,vereadores:4609}
   },
   {
     sigla:"CE",
@@ -99,7 +99,7 @@ var ESTADOS = [
     renda:1708,
     gent:"cearense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:22,deputadosEstaduais:46,prefeitos:184,vereadores:2194}
+    cargos:{senadores:3,deputadosFederais:22,deputadosEstaduais:46,prefeitos:184,vicePrefeitos:184,vereadores:2194}
   },
   {
     sigla:"DF",
@@ -116,7 +116,7 @@ var ESTADOS = [
     renda:4244,
     gent:"brasiliense",
     instalacao:"1960 (21 de abril)",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:1,vereadores:43}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:1,vicePrefeitos:1,vereadores:43}
   },
   {
     sigla:"ES",
@@ -133,7 +133,7 @@ var ESTADOS = [
     renda:2540,
     gent:"capixaba",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:10,deputadosEstaduais:30,prefeitos:78,vereadores:914}
+    cargos:{senadores:3,deputadosFederais:10,deputadosEstaduais:30,prefeitos:78,vicePrefeitos:78,vereadores:914}
   },
   {
     sigla:"GO",
@@ -150,7 +150,7 @@ var ESTADOS = [
     renda:2522,
     gent:"goiano",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:17,deputadosEstaduais:41,prefeitos:246,vereadores:2568}
+    cargos:{senadores:3,deputadosFederais:17,deputadosEstaduais:41,prefeitos:246,vicePrefeitos:246,vereadores:2568}
   },
   {
     sigla:"MA",
@@ -167,7 +167,7 @@ var ESTADOS = [
     renda:1455,
     gent:"maranhense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:18,deputadosEstaduais:42,prefeitos:217,vereadores:2401}
+    cargos:{senadores:3,deputadosFederais:18,deputadosEstaduais:42,prefeitos:217,vicePrefeitos:217,vereadores:2401}
   },
   {
     sigla:"MG",
@@ -184,7 +184,7 @@ var ESTADOS = [
     renda:2442,
     gent:"mineiro",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:53,deputadosEstaduais:77,prefeitos:853,vereadores:8745}
+    cargos:{senadores:3,deputadosFederais:53,deputadosEstaduais:77,prefeitos:853,vicePrefeitos:853,vereadores:8745}
   },
   {
     sigla:"MS",
@@ -201,7 +201,7 @@ var ESTADOS = [
     renda:2484,
     gent:"sul-mato-grossense",
     instalacao:"1979 (1 de janeiro)",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:79,vereadores:857}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:79,vicePrefeitos:79,vereadores:857}
   },
   {
     sigla:"MT",
@@ -218,7 +218,7 @@ var ESTADOS = [
     renda:2421,
     gent:"mato-grossense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:142,vereadores:1488}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:142,vicePrefeitos:142,vereadores:1488}
   },
   {
     sigla:"PA",
@@ -235,7 +235,7 @@ var ESTADOS = [
     renda:1736,
     gent:"paraense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:17,deputadosEstaduais:41,prefeitos:144,vereadores:1854}
+    cargos:{senadores:3,deputadosFederais:17,deputadosEstaduais:41,prefeitos:144,vicePrefeitos:144,vereadores:1854}
   },
   {
     sigla:"PB",
@@ -252,7 +252,7 @@ var ESTADOS = [
     renda:1780,
     gent:"paraibano",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:12,deputadosEstaduais:36,prefeitos:223,vereadores:2195}
+    cargos:{senadores:3,deputadosFederais:12,deputadosEstaduais:36,prefeitos:223,vicePrefeitos:223,vereadores:2195}
   },
   {
     sigla:"PE",
@@ -269,7 +269,7 @@ var ESTADOS = [
     renda:1989,
     gent:"pernambucano",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:25,deputadosEstaduais:49,prefeitos:185,vereadores:2209}
+    cargos:{senadores:3,deputadosFederais:25,deputadosEstaduais:49,prefeitos:185,vicePrefeitos:185,vereadores:2209}
   },
   {
     sigla:"PI",
@@ -286,7 +286,7 @@ var ESTADOS = [
     renda:1590,
     gent:"piauiense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:10,deputadosEstaduais:30,prefeitos:224,vereadores:2152}
+    cargos:{senadores:3,deputadosFederais:10,deputadosEstaduais:30,prefeitos:224,vicePrefeitos:224,vereadores:2152}
   },
   {
     sigla:"PR",
@@ -303,7 +303,7 @@ var ESTADOS = [
     renda:2765,
     gent:"paranaense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:30,deputadosEstaduais:54,prefeitos:399,vereadores:4171}
+    cargos:{senadores:3,deputadosFederais:30,deputadosEstaduais:54,prefeitos:399,vicePrefeitos:399,vereadores:4171}
   },
   {
     sigla:"RJ",
@@ -320,7 +320,7 @@ var ESTADOS = [
     renda:3285,
     gent:"fluminense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:46,deputadosEstaduais:70,prefeitos:92,vereadores:1376}
+    cargos:{senadores:3,deputadosFederais:46,deputadosEstaduais:70,prefeitos:92,vicePrefeitos:92,vereadores:1376}
   },
   {
     sigla:"RN",
@@ -337,7 +337,7 @@ var ESTADOS = [
     renda:1854,
     gent:"potiguar",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:167,vereadores:1653}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:167,vicePrefeitos:167,vereadores:1653}
   },
   {
     sigla:"RO",
@@ -354,7 +354,7 @@ var ESTADOS = [
     renda:2134,
     gent:"rondoniense",
     instalacao:"1982 (4 de julho)",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:52,vereadores:570}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:52,vicePrefeitos:52,vereadores:570}
   },
   {
     sigla:"RR",
@@ -371,7 +371,7 @@ var ESTADOS = [
     renda:1863,
     gent:"roraimense",
     instalacao:"1988 (5 de outubro)",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:15,vereadores:163}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:15,vicePrefeitos:15,vereadores:163}
   },
   {
     sigla:"RS",
@@ -388,7 +388,7 @@ var ESTADOS = [
     renda:2974,
     gent:"gaúcho",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:31,deputadosEstaduais:55,prefeitos:497,vereadores:5079}
+    cargos:{senadores:3,deputadosFederais:31,deputadosEstaduais:55,prefeitos:497,vicePrefeitos:497,vereadores:5079}
   },
   {
     sigla:"SC",
@@ -405,7 +405,7 @@ var ESTADOS = [
     renda:3064,
     gent:"catarinense",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:16,deputadosEstaduais:40,prefeitos:295,vereadores:3101}
+    cargos:{senadores:3,deputadosFederais:16,deputadosEstaduais:40,prefeitos:295,vicePrefeitos:295,vereadores:3101}
   },
   {
     sigla:"SE",
@@ -422,7 +422,7 @@ var ESTADOS = [
     renda:1896,
     gent:"sergipano",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:75,vereadores:809}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:75,vicePrefeitos:75,vereadores:809}
   },
   {
     sigla:"SP",
@@ -439,7 +439,7 @@ var ESTADOS = [
     renda:3680,
     gent:"paulista",
     instalacao:"1889",
-    cargos:{senadores:3,deputadosFederais:70,deputadosEstaduais:94,prefeitos:645,vereadores:7619}
+    cargos:{senadores:3,deputadosFederais:70,deputadosEstaduais:94,prefeitos:645,vicePrefeitos:645,vereadores:7619}
   },
   {
     sigla:"TO",
@@ -456,7 +456,7 @@ var ESTADOS = [
     renda:1975,
     gent:"tocantinense",
     instalacao:"1988 (5 de outubro)",
-    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:139,vereadores:1319}
+    cargos:{senadores:3,deputadosFederais:8,deputadosEstaduais:24,prefeitos:139,vicePrefeitos:139,vereadores:1319}
   }
 ];
 
