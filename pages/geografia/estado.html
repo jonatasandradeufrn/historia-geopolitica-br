@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dados do estado brasileiro">
+    <title>Estado - Geografia</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+</head>
+<body>
+<header class="header">
+    <div class="container header-inner">
+        <h1><a href="../../index.html"><span>📜</span> História do Brasil</a></h1>
+        <nav class="header-nav">
+            <a href="../../pages/historia/index.html">História</a>
+            <a href="index.html" style="background:var(--amarelo);color:var(--azul-escuro);">Geografia</a>
+            <a href="../../pages/geopolitica/index.html">Geopolítica</a>
+        </nav>
+    </div>
+</header>
+
+<section class="page-header" id="estadoPageHeader" style="background:linear-gradient(135deg,#009c3b 0%,#002776 100%)">
+    <div class="container" id="estadoHeaderContent"></div>
+</section>
+
+<main class="page-content">
+    <div class="container">
+        <div class="geo-dados-grid" id="estadoDadosGrid"></div>
+
+        <div class="geo-section" id="secaoHistoria" style="display:none;">
+            <h2 class="geo-section-title">História do Estado</h2>
+            <div class="geo-card-full" id="estadoHistoria"></div>
+        </div>
+
+        <div class="geo-section" id="secaoHino" style="display:none;">
+            <h2 class="geo-section-title">Hino Estadual</h2>
+            <div class="geo-card-full" id="estadoHino"></div>
+        </div>
+
+        <div class="geo-section" id="secaoCargos" style="display:none;">
+            <h2 class="geo-section-title">Cargos Políticos</h2>
+            <div class="geo-card-full" id="estadoCargos"></div>
+        </div>
+
+        <div class="geo-section" id="secaoGastos" style="display:none;">
+            <h2 class="geo-section-title">Gastos Públicos (Saúde, Educação, Segurança)</h2>
+            <div class="geo-card-full" id="estadoGastos"></div>
+        </div>
+
+        <div class="page-nav">
+            <a href="estados.html" class="nav-back">← Voltar aos Estados</a>
+            <a href="municipios.html">Municípios →</a>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p><strong>Estados do Brasil — Dados Geográficos</strong></p>
+        <p>Dados: IBGE, PNUD, IPEA | Última atualização: Junho de 2026</p>
+        <p><a href="../../index.html">← Voltar ao Início</a></p>
+    </div>
+</footer>
+
+<script src="../../script.js"></script>
+<script src="dados/estados.js"></script>
+<script src="dados/cargos-desc.js"></script>
+<script src="dados/hinos-estaduais.js"></script>
+<script src="dados/historia-estados.js"></script>
+<script src="dados/gastos.js"></script>
+<script>
+(function() {
+    try {
+        var params = new URLSearchParams(window.location.search);
+        var uf = params.get('uf') || '';
+        var estado = null;
+        for (var i = 0; i < ESTADOS.length; i++) {
+            if (ESTADOS[i].sigla === uf) { estado = ESTADOS[i]; break; }
+        }
+        if (!estado) { document.querySelector('.page-content').innerHTML = '<div class="container"><div class="geo-fonte-nota"><strong>Estado não encontrado.</strong> <a href="estados.html">Voltar para lista de estados</a></div></div>'; return; }
+        if (typeof GASTOS_PUBLICOS === 'undefined') { var GASTOS_PUBLICOS = { estados: {} }; }
+        if (typeof HISTORIA_ESTADOS === 'undefined') { var HISTORIA_ESTADOS = {}; }
+        if (typeof HINOS_ESTADUAIS === 'undefined') { var HINOS_ESTADUAIS = {}; }
+
+        var formatNum = function(n) { return n.toLocaleString('pt-BR'); };
+        var fmtDin = function(n) { return n.toLocaleString('pt-BR', {minimumFractionDigits:2,maximumFractionDigits:2}); };
+        var e = estado;
+        var SAL = { gov: 35000, viceGov: 25000, sen: 39293.32, depFed: 39293.32, depEst: 29469.99, prefeito: 20000, vicePref: 12000, ver: 10000 };
+
+        document.getElementById('estadoPageHeader').style.background = 'linear-gradient(135deg,' + e.regiaoCor + ' 0%,#002776 100%)';
+        document.getElementById('estadoHeaderContent').innerHTML = '<div class="estado-header-wrap"><img class="estado-bandeira-grande" src="img/bandeiras/' + e.sigla + '.svg" alt="' + e.nome + '" onerror="this.style.display=\'none\'"><div><h1>' + e.nome + '</h1><span class="periodo">' + e.sigla + ' — ' + e.capital + '</span><p style="margin-top:8px;opacity:0.9;">Região ' + e.regiao + ' | Gentílico: ' + e.gent + '</p></div></div>';
+
+        document.getElementById('estadoDadosGrid').innerHTML = [
+            { label: 'Capital', value: e.capital },
+            { label: 'Região', value: e.regiao },
+            { label: 'População', value: formatNum(e.pop), sub: 'Censo IBGE 2022' },
+            { label: 'Área', value: formatNum(e.area) + ' km²', sub: 'Densidade: ' + e.dd + ' hab/km²' },
+            { label: 'PIB', value: 'R$ ' + (e.pib / 1e9).toFixed(2) + ' bi', sub: 'Per capita: R$ ' + formatNum(e.pibpc) },
+            { label: 'IDH', value: e.idh, sub: 'Renda média: R$ ' + formatNum(e.renda) },
+            { label: 'Gentílico', value: e.gent },
+            { label: 'Instalação', value: e.instalacao }
+        ].map(function(d) { return '<div class="geo-dado-card"><div class="geo-dado-label">' + d.label + '</div><div class="geo-dado-value">' + d.value + '</div>' + (d.sub ? '<div class="geo-dado-sub">' + d.sub + '</div>' : '') + '</div>'; }).join('');
+
+        var hist = HISTORIA_ESTADOS[e.sigla];
+        if (hist) {
+            document.getElementById('secaoHistoria').style.display = '';
+            var nomesHtml = '';
+            if (hist.nomesAntigos && hist.nomesAntigos.length > 0) { nomesHtml = '<p><strong>Nomes antigos:</strong> ' + hist.nomesAntigos.join(', ') + '</p>'; }
+            document.getElementById('estadoHistoria').innerHTML = '<p><strong>Criação:</strong> ' + hist.criacao + '</p>' + nomesHtml + '<div class="hist-resumo"><p>' + hist.resumo + '</p></div>';
+        }
+
+        var hino = HINOS_ESTADUAIS[e.sigla];
+        if (hino) {
+            document.getElementById('secaoHino').style.display = '';
+            document.getElementById('estadoHino').innerHTML = '<p><strong>Título:</strong> ' + hino.titulo + '</p><p><strong>Letra:</strong> ' + hino.letra + '</p><p><strong>Música:</strong> ' + hino.musica + '</p><p><strong>Adoção:</strong> ' + hino.adocao + '</p><pre class="hino-letra">' + hino.letraCompleta.join('\n') + '</pre>';
+        }
+
+        if (e.cargos) {
+            document.getElementById('secaoCargos').style.display = '';
+            var c = e.cargos;
+            var custoMes = SAL.gov * 1 + SAL.viceGov * 1 + SAL.sen * 3 + SAL.depFed * c.deputadosFederais + SAL.depEst * c.deputadosEstaduais + SAL.prefeito * c.prefeitos + SAL.ver * c.vereadores;
+            var custoAno = custoMes * 13.33;
+            document.getElementById('estadoCargos').innerHTML =
+                '<table class="cargos-tabela"><thead><tr><th>Cargo</th><th>Qtd</th><th>Salário (mês)</th><th>Custo Mensal</th><th>Custo Anual</th></tr></thead><tbody>'
+                + '<tr><td>Governador</td><td class="cargos-num">1</td><td class="cargos-num">~R$ 35.000</td><td class="cargos-num">R$ ' + fmtDin(SAL.gov) + '</td><td class="cargos-num">R$ ' + fmtDin(SAL.gov * 13.33) + '</td></tr>'
+                + '<tr><td>Vice-Governador</td><td class="cargos-num">1</td><td class="cargos-num">~R$ 25.000</td><td class="cargos-num">R$ ' + fmtDin(SAL.viceGov) + '</td><td class="cargos-num">R$ ' + fmtDin(SAL.viceGov * 13.33) + '</td></tr>'
+                + '<tr><td>Senadores</td><td class="cargos-num">3</td><td class="cargos-num">R$ 39.293,32</td><td class="cargos-num">R$ ' + fmtDin(SAL.sen * 3) + '</td><td class="cargos-num">R$ ' + fmtDin(SAL.sen * 3 * 13.33) + '</td></tr>'
+                + '<tr><td>Deputados Federais</td><td class="cargos-num">' + c.deputadosFederais + '</td><td class="cargos-num">R$ 39.293,32</td><td class="cargos-num">R$ ' + fmtDin(SAL.depFed * c.deputadosFederais) + '</td><td class="cargos-num">R$ ' + fmtDin(SAL.depFed * c.deputadosFederais * 13.33) + '</td></tr>'
+                + '<tr><td>Deputados Estaduais</td><td class="cargos-num">' + c.deputadosEstaduais + '</td><td class="cargos-num">~R$ 29.469,99</td><td class="cargos-num">R$ ' + fmtDin(SAL.depEst * c.deputadosEstaduais) + '</td><td class="cargos-num">R$ ' + fmtDin(SAL.depEst * c.deputadosEstaduais * 13.33) + '</td></tr>'
+                + '<tr><td>Prefeitos</td><td class="cargos-num">' + c.prefeitos + '</td><td class="cargos-num">~R$ 20.000/mês</td><td class="cargos-num">R$ ' + fmtDin(SAL.prefeito * c.prefeitos) + '</td><td class="cargos-num">R$ ' + fmtDin(SAL.prefeito * c.prefeitos * 13.33) + '</td></tr>'
+                + '<tr><td>Vereadores</td><td class="cargos-num">' + formatNum(c.vereadores) + '</td><td class="cargos-num">~R$ 10.000/mês</td><td class="cargos-num">R$ ' + fmtDin(SAL.ver * c.vereadores) + '</td><td class="cargos-num">R$ ' + fmtDin(SAL.ver * c.vereadores * 13.33) + '</td></tr>'
+                + '<tr class="cargos-total"><td><strong>TOTAL</strong></td><td></td><td></td><td class="cargos-num"><strong>R$ ' + fmtDin(custoMes) + '/mês</strong></td><td class="cargos-num"><strong>R$ ' + fmtDin(custoAno) + '/ano*</strong></td></tr>'
+                + '</tbody></table>'
+                + '<div class="cargos-desc">'
+                + '<h4>Atribuições, direitos e deveres</h4>'
+                + (CARGOS_DESC.governador ? '<div class="cargos-desc-item"><strong>Governador</strong> (1)<p>' + CARGOS_DESC.governador.descricao + '</p></div>' : '')
+                + (CARGOS_DESC.viceGovernador ? '<div class="cargos-desc-item"><strong>Vice-Governador</strong> (1)<p>' + CARGOS_DESC.viceGovernador.descricao + '</p></div>' : '')
+                + (CARGOS_DESC.senador ? '<div class="cargos-desc-item"><strong>Senadores</strong> (3)<p>' + CARGOS_DESC.senador.descricao + '</p></div>' : '')
+                + (CARGOS_DESC.deputadoFederal ? '<div class="cargos-desc-item"><strong>Deputados Federais</strong> (' + c.deputadosFederais + ')<p>' + CARGOS_DESC.deputadoFederal.descricao + '</p></div>' : '')
+                + (CARGOS_DESC.deputadoEstadual ? '<div class="cargos-desc-item"><strong>Deputados Estaduais</strong> (' + c.deputadosEstaduais + ')<p>' + CARGOS_DESC.deputadoEstadual.descricao + '</p></div>' : '')
+                + (CARGOS_DESC.prefeito ? '<div class="cargos-desc-item"><strong>Prefeitos</strong> (' + c.prefeitos + ')<p>' + CARGOS_DESC.prefeito.descricao + '</p></div>' : '')
+                + (CARGOS_DESC.vereador ? '<div class="cargos-desc-item"><strong>Vereadores</strong> (' + formatNum(c.vereadores) + ')<p>' + CARGOS_DESC.vereador.descricao + '</p></div>' : '')
+                + '</div>'
+                + '<p class="geo-fonte"><strong>*Custo Anual:</strong> salário × 13,33 (13 salários + ⅓ férias). Fontes: Teto constitucional STF, Senado Federal, Câmara dos Deputados. Valores não incluem verbas indenizatórias. Consulte fontes oficiais.</p>';
+        }
+
+        var gastos = GASTOS_PUBLICOS.estados && GASTOS_PUBLICOS.estados[e.sigla];
+        if (gastos) {
+            document.getElementById('secaoGastos').style.display = '';
+            var totalEstadual = (gastos.saude.valor + gastos.educacao.valor + gastos.seguranca.valor);
+            document.getElementById('estadoGastos').innerHTML =
+                '<table class="cargos-tabela"><thead><tr><th>Setor</th><th>Gasto Anual (R$ bi)</th><th>% do Orçamento Estadual</th></tr></thead><tbody>'
+                + '<tr><td><strong>Saúde</strong></td><td class="cargos-num">R$ ' + gastos.saude.valor.toFixed(1) + ' bi</td><td class="cargos-num">' + gastos.saude.pctOrcamento + '%</td></tr>'
+                + '<tr><td><strong>Educação</strong></td><td class="cargos-num">R$ ' + gastos.educacao.valor.toFixed(1) + ' bi</td><td class="cargos-num">' + gastos.educacao.pctOrcamento + '%</td></tr>'
+                + '<tr><td><strong>Segurança Pública</strong></td><td class="cargos-num">R$ ' + gastos.seguranca.valor.toFixed(1) + ' bi</td><td class="cargos-num">' + gastos.seguranca.pctOrcamento + '%</td></tr>'
+                + '<tr class="cargos-total"><td><strong>TOTAL</strong></td><td class="cargos-num"><strong>R$ ' + totalEstadual.toFixed(1) + ' bi</strong></td><td class="cargos-num"><strong>' + (gastos.saude.pctOrcamento + gastos.educacao.pctOrcamento + gastos.seguranca.pctOrcamento).toFixed(1) + '%</strong></td></tr>'
+                + '</tbody></table>'
+                + '<p class="geo-fonte">Fonte: Estimativas baseadas em dados SICONFI/STN. Consulte fontes oficiais para dados atualizados.</p>';
+        }
+    } catch (err) {
+        document.querySelector('.page-content').innerHTML = '<div class="container"><div class="geo-fonte-nota"><strong>Erro:</strong> ' + err.message + '</div></div>';
+    }
+})();
+</script>
+</body>
+</html>

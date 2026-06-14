@@ -106,7 +106,8 @@
                 var custos = calcCustos(e.cargos);
                 var custoStr = 'R$ ' + fmtDin(custos.mes) + '/mês';
                 html += '<div class="geo-estado-card reveal" id="card-' + e.sigla + '" style="border-left:5px solid ' + e.regiaoCor + '">'
-                    + '<div class="geo-estado-header" onclick="var d=this.parentNode.querySelector(\'.cargos-details\');if(d){d.open=!d.open;if(d.open)d.scrollIntoView({behavior:\'smooth\',block:\'nearest\'})}">'
+                    + '<div class="geo-estado-header" onclick="location.href=\'estado.html?uf=' + e.sigla + '\'" style="cursor:pointer;">'
+                    + '<img class="geo-estado-bandeira" src="img/bandeiras/' + e.sigla + '.svg" alt="' + e.nome + '" loading="lazy" onerror="this.style.display=\'none\'">'
                     + '<span class="geo-estado-sigla" style="background:' + e.regiaoCor + '">' + e.sigla + '</span>'
                     + '<h3>' + e.nome + '</h3>'
                     + '<span class="geo-custo-badge">💰 ' + custoStr + '</span>'
@@ -126,33 +127,9 @@
                     + '<span class="cargos-tag">📋 ' + (e.cargos ? e.cargos.deputadosEstaduais : '?') + ' Dep.Est.</span>'
                     + '<span class="cargos-tag">🏙 ' + (e.cargos ? e.cargos.prefeitos : '?') + ' Pref.</span>'
                     + '<span class="cargos-tag">👥 ' + (e.cargos ? formatNum(e.cargos.vereadores) : '?') + ' Ver.</span>'
-                    + '</div>'; 
-                if (e.cargos) {
-                    html += '<details class="cargos-details"><summary>Cargos políticos e custos</summary>'
-                        + '<table class="cargos-tabela-mini">'
-                        + '<tr><td>Governador</td><td>1</td><td>~R$ 35.000/mês</td><td>R$ ' + fmtDin(SAL.gov * 1) + '</td></tr>'
-                        + '<tr><td>Vice-Governador</td><td>1</td><td>~R$ 25.000/mês</td><td>R$ ' + fmtDin(SAL.viceGov * 1) + '</td></tr>'
-                        + '<tr><td>Senadores</td><td>3</td><td>R$ 39.293,32/mês</td><td>R$ ' + fmtDin(SAL.sen * 3) + '</td></tr>'
-                        + '<tr><td>Deputados Federais</td><td>' + e.cargos.deputadosFederais + '</td><td>R$ 39.293,32/mês</td><td>R$ ' + fmtDin(SAL.depFed * e.cargos.deputadosFederais) + '</td></tr>'
-                        + '<tr><td>Deputados Estaduais</td><td>' + e.cargos.deputadosEstaduais + '</td><td>~R$ 29.469,99/mês</td><td>R$ ' + fmtDin(SAL.depEst * e.cargos.deputadosEstaduais) + '</td></tr>'
-                        + '<tr><td>Prefeitos</td><td>' + e.cargos.prefeitos + '</td><td>~R$ 20.000/mês (média)</td><td>R$ ' + fmtDin(SAL.prefeito * e.cargos.prefeitos) + '</td></tr>'
-                        + '<tr><td>Vereadores</td><td>' + formatNum(e.cargos.vereadores) + '</td><td>~R$ 10.000/mês (média)</td><td>R$ ' + fmtDin(SAL.ver * e.cargos.vereadores) + '</td></tr>'
-                        + '<tr class="cargos-total"><td><strong>TOTAL</strong></td><td></td><td></td><td><strong>R$ ' + fmtDin(custos.mes) + '/mês</strong><br><small>R$ ' + fmtDin(custos.ano) + '/ano*</small></td></tr>'
-                        + '</table>'
-                        + '<div class="cargos-desc">'
-                        + '<h4>Atribuições, direitos e deveres</h4>'
-                        + '<div class="cargos-desc-item"><strong>Governador</strong> (1)<p>' + CARGOS_DESC.governador.descricao + '</p></div>'
-                        + '<div class="cargos-desc-item"><strong>Vice-Governador</strong> (1)<p>' + CARGOS_DESC.viceGovernador.descricao + '</p></div>'
-                        + '<div class="cargos-desc-item"><strong>Senadores</strong> (3)<p>' + CARGOS_DESC.senador.descricao + '</p></div>'
-                        + '<div class="cargos-desc-item"><strong>Deputados Federais</strong> (' + e.cargos.deputadosFederais + ')<p>' + CARGOS_DESC.deputadoFederal.descricao + '</p></div>'
-                        + '<div class="cargos-desc-item"><strong>Deputados Estaduais</strong> (' + e.cargos.deputadosEstaduais + ')<p>' + CARGOS_DESC.deputadoEstadual.descricao + '</p></div>'
-                        + '<div class="cargos-desc-item"><strong>Prefeitos</strong> (' + e.cargos.prefeitos + ')<p>' + CARGOS_DESC.prefeito.descricao + '</p></div>'
-                        + '<div class="cargos-desc-item"><strong>Vereadores</strong> (' + formatNum(e.cargos.vereadores) + ')<p>' + CARGOS_DESC.vereador.descricao + '</p></div>'
-                        + '</div>'
-                        + '<p class="geo-fonte">Fontes: Teto constitucional STF, Senado Federal, Câmara dos Deputados. Demais valores são estimativas — consulte fontes oficiais.</p>'
-                        + '</details>';
-                }
-                html += '</div></div>';
+                    + '</div>'
+                    + '<p style="margin-top:12px;text-align:right;"><a href="estado.html?uf=' + e.sigla + '" class="nav-back" style="display:inline-block;">🔍 Ver página completa →</a></p>'
+                    + '</div></div>';
             }
             document.getElementById('estadosGrid').innerHTML = html;
         }

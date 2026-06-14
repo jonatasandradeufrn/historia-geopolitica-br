@@ -53,6 +53,11 @@
             <div class="geo-card-full" id="cargosBrasil"></div>
         </div>
 
+        <div class="geo-section">
+            <h2 class="geo-section-title">Gastos Públicos Federais</h2>
+            <div class="geo-card-full" id="gastosBrasil"></div>
+        </div>
+
         <div class="geo-fonte-nota">
             <p id="fonteNota"></p>
         </div>
@@ -76,6 +81,7 @@
 <script src="../../script.js"></script>
 <script src="dados/brasil.js"></script>
 <script src="dados/cargos-desc.js"></script>
+<script src="dados/gastos.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const b = BRASIL;
@@ -137,6 +143,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }).join('')
     + '</div></details>'
     + '<p class="geo-fonte" style="margin-top:10px;"><strong>*Custo Anual:</strong> salário × 13,33 (13 salários + ⅓ férias). <strong>Nota:</strong> ' + b.cargosFonteGeral + ' Valores não incluem verbas indenizatórias, gabinete, passagens, auxílio-moradia e demais benefícios.</p>';
+
+    var g = typeof GASTOS_PUBLICOS !== 'undefined' ? GASTOS_PUBLICOS.federal : null;
+    if (g) {
+        var totalFed = g.saude.valor + g.educacao.valor + g.seguranca.valor;
+        document.getElementById('gastosBrasil').innerHTML =
+            '<table class="cargos-tabela"><thead><tr><th>Setor</th><th>Gasto Anual (R$)</th><th>% PIB</th><th>Descrição</th></tr></thead><tbody>'
+            + '<tr><td><strong>Saúde</strong></td><td class="cargos-num">R$ ' + g.saude.valor.toFixed(1) + ' bi</td><td class="cargos-num">' + g.saude.percentualPIB + '%</td><td>' + g.saude.descricao + '</td></tr>'
+            + '<tr><td><strong>Educação</strong></td><td class="cargos-num">R$ ' + g.educacao.valor.toFixed(1) + ' bi</td><td class="cargos-num">' + g.educacao.percentualPIB + '%</td><td>' + g.educacao.descricao + '</td></tr>'
+            + '<tr><td><strong>Segurança Pública</strong></td><td class="cargos-num">R$ ' + g.seguranca.valor.toFixed(1) + ' bi</td><td class="cargos-num">' + g.seguranca.percentualPIB + '%</td><td>' + g.seguranca.descricao + '</td></tr>'
+            + '<tr class="cargos-total"><td><strong>TOTAL</strong></td><td class="cargos-num"><strong>R$ ' + totalFed.toFixed(1) + ' bi</strong></td><td class="cargos-num"><strong>' + (g.saude.percentualPIB + g.educacao.percentualPIB + g.seguranca.percentualPIB).toFixed(1) + '%</strong></td><td></td></tr>'
+            + '</tbody></table>'
+            + '<p class="geo-fonte">Ano: ' + g.ano + ' | Fonte: ' + g.fonte + '</p>';
+    } else {
+        document.getElementById('gastosBrasil').innerHTML = '<p class="geo-fonte">Dados de gastos públicos federais não disponíveis. Consulte SIGA Brasil/Senado Federal.</p>';
+    }
 
     document.getElementById('fonteNota').innerHTML = '<strong>Última atualização:</strong> ' + b.ultimaAtualizacao + ' | <strong>Observação:</strong> ' + b.observacao;
 });

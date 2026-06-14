@@ -926,11 +926,23 @@ body {
 }
 
 .geo-estado-header {
-    padding: 18px 20px;
+    padding: 12px 20px;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     border-bottom: 2px solid #f0f0f0;
+    transition: background 0.2s;
+}
+.geo-estado-header:hover {
+    background: var(--verde-claro);
+}
+.geo-estado-bandeira {
+    width: 40px;
+    height: 28px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    flex-shrink: 0;
 }
 
 .geo-estado-sigla {
@@ -1261,4 +1273,45 @@ body {
     .cargos-tabela td {
         padding: 5px 6px;
     }
+}
+
+.estado-header-wrap {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+}
+.estado-bandeira-grande {
+    width: 120px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+}
+.hist-resumo {
+    margin-top: 12px;
+    line-height: 1.7;
+    font-size: 0.92rem;
+    color: #333;
+    text-align: justify;
+}
+#secaoHistoria, #secaoHino, #secaoCargos, #secaoGastos {
+    scroll-margin-top: 20px;
+}
+.hino-letra {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    font-family: 'Georgia', serif;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    border-left: 4px solid var(--verde);
+    color: #333;
+    max-height: 500px;
+    overflow-y: auto;
 }

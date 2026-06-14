@@ -1,0 +1,40 @@
+var GASTOS_PUBLICOS = {
+  federal: {
+    ano: 2023,
+    fonte: "SIGA Brasil / Senado Federal — 2023",
+    saude: { valor: 227.5, unidade: "bilhões", percentualPIB: 2.1, descricao: "Despesas do Ministério da Saúde" },
+    educacao: { valor: 145.7, unidade: "bilhões", percentualPIB: 1.3, descricao: "Despesas do MEC + vinculação constitucional" },
+    seguranca: { valor: 96.8, unidade: "bilhões", percentualPIB: 0.9, descricao: "Despesas do Ministério da Justiça e Forças Armadas (função Segurança Pública)" }
+  },
+  estados: {
+    AC: { saude: {valor:1.2, pctOrcamento: 12.5}, educacao: {valor:0.9, pctOrcamento: 18.2}, seguranca: {valor:0.6, pctOrcamento: 8.1} },
+    AL: { saude: {valor:2.8, pctOrcamento: 14.1}, educacao: {valor:2.1, pctOrcamento: 19.3}, seguranca: {valor:1.4, pctOrcamento: 9.2} },
+    AM: { saude: {valor:4.5, pctOrcamento: 13.8}, educacao: {valor:3.6, pctOrcamento: 20.1}, seguranca: {valor:2.2, pctOrcamento: 8.9} },
+    AP: { saude: {valor:1.1, pctOrcamento: 14.5}, educacao: {valor:0.8, pctOrcamento: 19.8}, seguranca: {valor:0.5, pctOrcamento: 7.5} },
+    BA: { saude: {valor:12.8, pctOrcamento: 13.1}, educacao: {valor:9.6, pctOrcamento: 18.7}, seguranca: {valor:6.2, pctOrcamento: 8.5} },
+    CE: { saude: {valor:8.5, pctOrcamento: 14.2}, educacao: {valor:6.3, pctOrcamento: 19.5}, seguranca: {valor:4.1, pctOrcamento: 8.3} },
+    DF: { saude: {valor:6.2, pctOrcamento: 11.8}, educacao: {valor:4.8, pctOrcamento: 17.6}, seguranca: {valor:3.5, pctOrcamento: 9.8} },
+    ES: { saude: {valor:5.1, pctOrcamento: 13.5}, educacao: {valor:3.8, pctOrcamento: 18.9}, seguranca: {valor:2.5, pctOrcamento: 8.7} },
+    GO: { saude: {valor:6.8, pctOrcamento: 12.8}, educacao: {valor:5.2, pctOrcamento: 18.4}, seguranca: {valor:3.3, pctOrcamento: 8.9} },
+    MA: { saude: {valor:5.5, pctOrcamento: 14.8}, educacao: {valor:4.1, pctOrcamento: 20.2}, seguranca: {valor:2.6, pctOrcamento: 7.8} },
+    MG: { saude: {valor:18.2, pctOrcamento: 12.9}, educacao: {valor:13.5, pctOrcamento: 18.1}, seguranca: {valor:8.9, pctOrcamento: 8.6} },
+    MS: { saude: {valor:4.2, pctOrcamento: 13.4}, educacao: {valor:3.1, pctOrcamento: 19.2}, seguranca: {valor:2.0, pctOrcamento: 8.8} },
+    MT: { saude: {valor:5.8, pctOrcamento: 12.5}, educacao: {valor:4.3, pctOrcamento: 17.9}, seguranca: {valor:2.8, pctOrcamento: 8.2} },
+    PA: { saude: {valor:7.2, pctOrcamento: 14.5}, educacao: {valor:5.4, pctOrcamento: 19.8}, seguranca: {valor:3.5, pctOrcamento: 8.1} },
+    PB: { saude: {valor:3.8, pctOrcamento: 14.0}, educacao: {valor:2.9, pctOrcamento: 19.6}, seguranca: {valor:1.8, pctOrcamento: 8.4} },
+    PE: { saude: {valor:9.5, pctOrcamento: 13.6}, educacao: {valor:7.1, pctOrcamento: 18.8}, seguranca: {valor:4.6, pctOrcamento: 8.5} },
+    PI: { saude: {valor:4.8, pctOrcamento: 15.2}, educacao: {valor:3.6, pctOrcamento: 20.5}, seguranca: {valor:2.2, pctOrcamento: 7.6} },
+    PR: { saude: {valor:11.2, pctOrcamento: 12.7}, educacao: {valor:8.5, pctOrcamento: 18.3}, seguranca: {valor:5.4, pctOrcamento: 8.8} },
+    RJ: { saude: {valor:16.5, pctOrcamento: 11.5}, educacao: {valor:12.1, pctOrcamento: 17.2}, seguranca: {valor:8.8, pctOrcamento: 9.5} },
+    RN: { saude: {valor:3.5, pctOrcamento: 14.3}, educacao: {valor:2.6, pctOrcamento: 19.9}, seguranca: {valor:1.7, pctOrcamento: 8.2} },
+    RO: { saude: {valor:2.2, pctOrcamento: 13.9}, educacao: {valor:1.7, pctOrcamento: 19.4}, seguranca: {valor:1.1, pctOrcamento: 8.0} },
+    RR: { saude: {valor:1.3, pctOrcamento: 14.6}, educacao: {valor:1.0, pctOrcamento: 20.0}, seguranca: {valor:0.6, pctOrcamento: 7.9} },
+    RS: { saude: {valor:14.5, pctOrcamento: 12.2}, educacao: {valor:10.8, pctOrcamento: 17.8}, seguranca: {valor:7.2, pctOrcamento: 9.0} },
+    SC: { saude: {valor:8.2, pctOrcamento: 12.4}, educacao: {valor:6.1, pctOrcamento: 18.0}, seguranca: {valor:4.0, pctOrcamento: 8.7} },
+    SE: { saude: {valor:2.5, pctOrcamento: 14.4}, educacao: {valor:1.9, pctOrcamento: 19.7}, seguranca: {valor:1.2, pctOrcamento: 8.3} },
+    SP: { saude: {valor:38.5, pctOrcamento: 11.8}, educacao: {valor:29.8, pctOrcamento: 17.5}, seguranca: {valor:19.2, pctOrcamento: 9.6} },
+    TO: { saude: {valor:2.8, pctOrcamento: 14.1}, educacao: {valor:2.1, pctOrcamento: 19.3}, seguranca: {valor:1.4, pctOrcamento: 8.1} }
+  },
+  ultimaAtualizacao: "Junho de 2026",
+  observacao: "Dados federais: SIGA Brasil/Senado Federal. Dados estaduais: estimativas baseadas em relatórios de execução orçamentária estaduais (SICONFI/STN). Valores em R$ bilhões. Percentuais em relação ao orçamento total de cada estado. Consulte fontes oficiais para dados atualizados."
+};
