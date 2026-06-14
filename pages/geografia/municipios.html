@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Municípios do Brasil: busca, filtros e dados populacionais de todos os 5.570 municípios.">
+    <title>Municípios do Brasil - Geografia</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏙️</text></svg>">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-inner">
+        <h1><a href="../../index.html"><span>📜</span> História do Brasil</a></h1>
+        <nav class="header-nav">
+            <a href="../../index.html#colonial">Colônia</a>
+            <a href="../../index.html#imperio">Império</a>
+            <a href="../../index.html#republica-velha">Rep. Velha</a>
+            <a href="../../index.html#vargas">Vargas</a>
+            <a href="../../index.html#populista">Populista</a>
+            <a href="../../index.html#ditadura">Ditadura</a>
+            <a href="../../index.html#nova-republica">Nova República</a>
+            <a href="index.html" style="background:var(--amarelo);color:var(--azul-escuro);">Geografia</a>
+        </nav>
+    </div>
+</header>
+
+<section class="page-header" style="background:linear-gradient(135deg,#009c3b 0%,#002776 100%)">
+    <div class="container">
+        <h1>Municípios do Brasil</h1>
+        <span class="periodo">5.570 municípios</span>
+        <p style="margin-top:15px;max-width:600px;margin-left:auto;margin-right:auto;opacity:0.9;">Busque por nome ou filtre por estado/região. Para dados populacionais oficiais, <strong>consulte o IBGE</strong></p>
+    </div>
+</section>
+
+<main class="page-content">
+    <div class="container">
+
+        <div class="geo-filtros">
+            <input type="text" id="muniSearch" placeholder="Buscar município..." class="geo-search-input">
+            <select id="muniUF" class="geo-select">
+                <option value="all">Todos os estados</option>
+            </select>
+            <select id="muniRegiao" class="geo-select">
+                <option value="all">Todas as regiões</option>
+            </select>
+            <span id="muniCount" class="geo-result-count"></span>
+        </div>
+
+        <div id="muniContainer" class="geo-muni-grid"></div>
+
+        <div id="muniPagination" class="geo-pagination"></div>
+
+        <div class="geo-fonte-nota">
+            <p><strong>Fonte:</strong> IBGE — Consulte <a href="https://ibge.gov.br" target="_blank" rel="noopener">ibge.gov.br</a> para dados populacionais oficiais</p>
+            <p><strong>Última atualização:</strong> Junho de 2026</p>
+        </div>
+
+        <div class="page-nav">
+            <a href="index.html" class="nav-back">← Voltar à Geografia</a>
+            <a href="estados.html">← Estados</a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p><strong>Municípios do Brasil</strong></p>
+        <p>Consulte o IBGE para dados oficiais | Última atualização: Junho de 2026</p>
+        <p><a href="../../index.html">← Voltar à Linha do Tempo</a></p>
+    </div>
+</footer>
+
+<script src="../../script.js"></script>
+<script src="dados/municipios.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const PER_PAGE = 50;
+    const REGIOES = ['Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'];
+    const REGIOES_NOME = {'N':'Norte','NE':'Nordeste','CO':'Centro-Oeste','SE':'Sudeste','S':'Sul'};
+
+    const UF_CORES = {AC:"#4CAF50",AL:"#F44336",AM:"#4CAF50",AP:"#4CAF50",BA:"#F44336",CE:"#F44336",DF:"#FF9800",ES:"#2196F3",GO:"#FF9800",MA:"#F44336",MG:"#2196F3",MS:"#FF9800",MT:"#FF9800",PA:"#4CAF50",PB:"#F44336",PE:"#F44336",PI:"#F44336",PR:"#9C27B0",RJ:"#2196F3",RN:"#F44336",RO:"#4CAF50",RR:"#4CAF50",RS:"#9C27B0",SC:"#9C27B0",SE:"#F44336",SP:"#2196F3",TO:"#4CAF50"};
+
+    const ufs = [...new Set(MUNICIPIOS.map(m => m.uf))].sort();
+    const selUF = document.getElementById('muniUF');
+    ufs.forEach(u => { const o = document.createElement('option'); o.value = u; o.textContent = u; selUF.appendChild(o); });
+
+    const selReg = document.getElementById('muniRegiao');
+    REGIOES.forEach(r => { const o = document.createElement('option'); o.value = r; o.textContent = r; selReg.appendChild(o); });
+
+    let currentPage = 1;
+
+    function getFiltered() {
+        const search = document.getElementById('muniSearch').value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const uf = document.getElementById('muniUF').value;
+        const reg = document.getElementById('muniRegiao').value;
+
+        return MUNICIPIOS.filter(m => {
+            if (uf !== 'all' && m.uf !== uf) return false;
+            if (reg !== 'all') {
+                const regNome = REGIOES_NOME[m.reg] || m.reg;
+                if (regNome !== reg && m.reg !== reg) return false;
+            }
+            if (search) {
+                const nome = m.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                if (!nome.includes(search)) return false;
+            }
+            return true;
+        });
+    }
+
+    function render() {
+        const filtered = getFiltered();
+        const total = filtered.length;
+        const totalPages = Math.ceil(total / PER_PAGE);
+        if (currentPage > totalPages) currentPage = 1;
+
+        document.getElementById('muniCount').textContent = total + ' municípios';
+
+        const start = (currentPage - 1) * PER_PAGE;
+        const page = filtered.slice(start, start + PER_PAGE);
+
+        document.getElementById('muniContainer').innerHTML = page.map(m => `
+            <div class="geo-muni-item">
+                <span class="geo-muni-nome">${m.n}</span>
+                <span class="geo-muni-uf" style="background:${UF_CORES[m.uf] || '#999'}">${m.uf}</span>
+                <a class="geo-muni-pop" href="https://ibge.gov.br" target="_blank" rel="noopener" title="Consultar dados no IBGE">Consulte IBGE ↗</a>
+            </div>
+        `).join('');
+
+        let pag = '<button class="geo-page-btn" data-page="' + (currentPage - 1) + '"' + (currentPage <= 1 ? ' disabled' : '') + '>‹ Anterior</button>';
+        pag += '<span class="geo-page-info">Página ' + currentPage + ' de ' + totalPages + '</span>';
+        pag += '<button class="geo-page-btn" data-page="' + (currentPage + 1) + '"' + (currentPage >= totalPages ? ' disabled' : '') + '>Próxima ›</button>';
+        document.getElementById('muniPagination').innerHTML = pag;
+
+        document.querySelectorAll('.geo-page-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.disabled) return;
+                currentPage = parseInt(this.dataset.page);
+                render();
+                window.scrollTo({ top: document.querySelector('.geo-filtros').offsetTop - 100, behavior: 'smooth' });
+            });
+        });
+    }
+
+    document.getElementById('muniSearch').addEventListener('input', function() { currentPage = 1; render(); });
+    document.getElementById('muniUF').addEventListener('change', function() { currentPage = 1; render(); });
+    document.getElementById('muniRegiao').addEventListener('change', function() { currentPage = 1; render(); });
+
+    render();
+});
+</script>
+</body>
+</html>

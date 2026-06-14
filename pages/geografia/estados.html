@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Estados do Brasil: mapa interativo e dados completos de todos os 26 estados e DF.">
+    <title>Estados do Brasil - Geografia</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-inner">
+        <h1><a href="../../index.html"><span>📜</span> História do Brasil</a></h1>
+        <nav class="header-nav">
+            <a href="../../index.html#colonial">Colônia</a>
+            <a href="../../index.html#imperio">Império</a>
+            <a href="../../index.html#republica-velha">Rep. Velha</a>
+            <a href="../../index.html#vargas">Vargas</a>
+            <a href="../../index.html#populista">Populista</a>
+            <a href="../../index.html#ditadura">Ditadura</a>
+            <a href="../../index.html#nova-republica">Nova República</a>
+            <a href="index.html" style="background:var(--amarelo);color:var(--azul-escuro);">Geografia</a>
+        </nav>
+    </div>
+</header>
+
+<section class="page-header" style="background:linear-gradient(135deg,#009c3b 0%,#002776 100%)">
+    <div class="container">
+        <h1>Estados do Brasil</h1>
+        <span class="periodo">26 estados + Distrito Federal</span>
+        <p style="margin-top:15px;max-width:600px;margin-left:auto;margin-right:auto;opacity:0.9;">Use os filtros para explorar os dados de todos os 26 estados e o Distrito Federal</p>
+    </div>
+</section>
+
+<main class="page-content">
+    <div class="container">
+
+        <div class="geo-filtros">
+            <input type="text" id="estadoSearch" placeholder="Buscar estado..." class="geo-search-input">
+            <select id="regiaoFilter" class="geo-select">
+                <option value="all">Todas as regiões</option>
+            </select>
+            <select id="sortEstados" class="geo-select">
+                <option value="nome">Ordenar por nome</option>
+                <option value="pop">Ordenar por população</option>
+                <option value="area">Ordenar por área</option>
+                <option value="pib">Ordenar por PIB</option>
+                <option value="idh">Ordenar por IDH</option>
+            </select>
+        </div>
+
+        <div class="geo-estados-grid" id="estadosGrid"></div>
+
+        <div class="page-nav">
+            <a href="index.html" class="nav-back">← Voltar à Geografia</a>
+            <a href="municipios.html">Municípios →</a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p><strong>Estados do Brasil</strong></p>
+        <p>Dados: IBGE Censo 2022 | Última atualização: Junho de 2026</p>
+        <p><a href="../../index.html">← Voltar à Linha do Tempo</a></p>
+    </div>
+</footer>
+
+<script src="../../script.js"></script>
+<script src="dados/estados.js"></script>
+<script src="dados/cargos-desc.js"></script>
+<script>
+(function() {
+    try {
+        var formatNum = function(n) { return n.toLocaleString('pt-BR'); };
+        var regioes = [...new Set(ESTADOS.map(function(e) { return e.regiao; }))].sort();
+        var selRegiao = document.getElementById('regiaoFilter');
+        regioes.forEach(function(r) { var o = document.createElement('option'); o.value = r; o.textContent = r; selRegiao.appendChild(o); });
+
+        function renderEstados() {
+            var search = document.getElementById('estadoSearch').value.toLowerCase();
+            var regiao = document.getElementById('regiaoFilter').value;
+            var sort = document.getElementById('sortEstados').value;
+
+            var filtered = ESTADOS.filter(function(e) {
+                if (regiao !== 'all' && e.regiao !== regiao) return false;
+                if (search && e.nome.toLowerCase().indexOf(search) === -1 && e.sigla.toLowerCase().indexOf(search) === -1 && e.capital.toLowerCase().indexOf(search) === -1) return false;
+                return true;
+            });
+
+            if (sort === 'pop') filtered.sort(function(a, b) { return b.pop - a.pop; });
+            else if (sort === 'area') filtered.sort(function(a, b) { return b.area - a.area; });
+            else if (sort === 'pib') filtered.sort(function(a, b) { return b.pib - a.pib; });
+            else if (sort === 'idh') filtered.sort(function(a, b) { return b.idh - a.idh; });
+            else filtered.sort(function(a, b) { return a.nome.localeCompare(b.nome); });
+
+            var html = '';
+            for (var i = 0; i < filtered.length; i++) {
+                var e = filtered[i];
+                html += '<div class="geo-estado-card reveal" id="card-' + e.sigla + '" style="border-left:5px solid ' + e.regiaoCor + '">'
+                    + '<div class="geo-estado-header">'
+                    + '<span class="geo-estado-sigla" style="background:' + e.regiaoCor + '">' + e.sigla + '</span>'
+                    + '<h3>' + e.nome + '</h3></div>'
+                    + '<div class="geo-estado-body">'
+                    + '<p><strong>Capital:</strong> ' + e.capital + '</p>'
+                    + '<p><strong>Região:</strong> ' + e.regiao + '</p>'
+                    + '<p><strong>População:</strong> ' + formatNum(e.pop) + '</p>'
+                    + '<p><strong>Área:</strong> ' + formatNum(e.area) + ' km² <span class="geo-dado-sub">(dens: ' + e.dd + ' hab/km²)</span></p>'
+                    + '<p><strong>PIB:</strong> R$ ' + (e.pib / 1e9).toFixed(2) + ' bi <span class="geo-dado-sub">(per capita: R$ ' + formatNum(e.pibpc) + ')</span></p>'
+                    + '<p><strong>IDH:</strong> ' + e.idh + ' <span class="geo-dado-sub">(renda média: R$ ' + formatNum(e.renda) + ')</span></p>'
+                    + '<p><strong>Gentílico:</strong> ' + e.gent + '</p>'
+                    + '<p><strong>Instalação:</strong> ' + e.instalacao + '</p>'
+                    + '<div class="cargos-mini">'
+                    + '<span class="cargos-tag">🏛 ' + (e.cargos ? e.cargos.senadores : '?') + ' Sen.</span>'
+                    + '<span class="cargos-tag">📋 ' + (e.cargos ? e.cargos.deputadosFederais : '?') + ' Dep.Fed.</span>'
+                    + '<span class="cargos-tag">📋 ' + (e.cargos ? e.cargos.deputadosEstaduais : '?') + ' Dep.Est.</span>'
+                    + '<span class="cargos-tag">🏙 ' + (e.cargos ? e.cargos.prefeitos : '?') + ' Pref.</span>'
+                    + '<span class="cargos-tag">👥 ' + (e.cargos ? formatNum(e.cargos.vereadores) : '?') + ' Ver.</span>'
+                    + '</div>'; 
+                if (e.cargos) {
+                    html += '<details class="cargos-details"><summary>Cargos políticos e custos</summary>'
+                        + '<table class="cargos-tabela-mini">'
+                        + '<tr><td>Governador</td><td>1</td><td>~R$ 35.000/mês</td></tr>'
+                        + '<tr><td>Vice-Governador</td><td>1</td><td>~R$ 25.000/mês</td></tr>'
+                        + '<tr><td>Senadores</td><td>3</td><td>R$ 39.293,32/mês</td></tr>'
+                        + '<tr><td>Deputados Federais</td><td>' + e.cargos.deputadosFederais + '</td><td>R$ 39.293,32/mês</td></tr>'
+                        + '<tr><td>Deputados Estaduais</td><td>' + e.cargos.deputadosEstaduais + '</td><td>~R$ 29.469,99/mês</td></tr>'
+                        + '<tr><td>Prefeitos</td><td>' + e.cargos.prefeitos + '</td><td>~R$ 20.000/mês (média)</td></tr>'
+                        + '<tr><td>Vereadores</td><td>' + formatNum(e.cargos.vereadores) + '</td><td>~R$ 10.000/mês (média)</td></tr>'
+                        + '</table>'
+                        + '<div class="cargos-desc">'
+                        + '<h4>Atribuições, direitos e deveres</h4>'
+                        + '<div class="cargos-desc-item"><strong>Governador</strong> (1)<p>' + CARGOS_DESC.governador.descricao + '</p></div>'
+                        + '<div class="cargos-desc-item"><strong>Vice-Governador</strong> (1)<p>' + CARGOS_DESC.viceGovernador.descricao + '</p></div>'
+                        + '<div class="cargos-desc-item"><strong>Senadores</strong> (3)<p>' + CARGOS_DESC.senador.descricao + '</p></div>'
+                        + '<div class="cargos-desc-item"><strong>Deputados Federais</strong> (' + e.cargos.deputadosFederais + ')<p>' + CARGOS_DESC.deputadoFederal.descricao + '</p></div>'
+                        + '<div class="cargos-desc-item"><strong>Deputados Estaduais</strong> (' + e.cargos.deputadosEstaduais + ')<p>' + CARGOS_DESC.deputadoEstadual.descricao + '</p></div>'
+                        + '<div class="cargos-desc-item"><strong>Prefeitos</strong> (' + e.cargos.prefeitos + ')<p>' + CARGOS_DESC.prefeito.descricao + '</p></div>'
+                        + '<div class="cargos-desc-item"><strong>Vereadores</strong> (' + formatNum(e.cargos.vereadores) + ')<p>' + CARGOS_DESC.vereador.descricao + '</p></div>'
+                        + '</div>'
+                        + '<p class="geo-fonte">Fontes: Teto constitucional STF, Senado Federal, Câmara dos Deputados. Demais valores são estimativas — consulte fontes oficiais.</p>'
+                        + '</details>';
+                }
+                html += '</div></div>';
+            }
+            document.getElementById('estadosGrid').innerHTML = html;
+        }
+
+        document.getElementById('estadoSearch').addEventListener('input', renderEstados);
+        document.getElementById('regiaoFilter').addEventListener('change', renderEstados);
+        document.getElementById('sortEstados').addEventListener('change', renderEstados);
+
+        renderEstados();
+    } catch (err) {
+        document.getElementById('estadosGrid').innerHTML = '<div class="geo-fonte-nota"><strong>Erro ao carregar dados:</strong> ' + err.message + '<br><br>Verifique o console do navegador (F12) para mais detalhes.</div>';
+    }
+})();
+</script>
+</body>
+</html>

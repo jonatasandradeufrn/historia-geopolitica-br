@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dados completos do Brasil: população, área, PIB, IDH, bandeira, hino, biomas.">
+    <title>Brasil - Geografia</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇧🇷</text></svg>">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-inner">
+        <h1><a href="../../index.html"><span>📜</span> História do Brasil</a></h1>
+        <nav class="header-nav">
+            <a href="../../index.html#colonial">Colônia</a>
+            <a href="../../index.html#imperio">Império</a>
+            <a href="../../index.html#republica-velha">Rep. Velha</a>
+            <a href="../../index.html#vargas">Vargas</a>
+            <a href="../../index.html#populista">Populista</a>
+            <a href="../../index.html#ditadura">Ditadura</a>
+            <a href="../../index.html#nova-republica">Nova República</a>
+            <a href="index.html" style="background:var(--amarelo);color:var(--azul-escuro);">Geografia</a>
+        </nav>
+    </div>
+</header>
+
+<section class="page-header" style="background:linear-gradient(135deg,#009c3b 0%,#002776 100%)">
+    <div class="container">
+        <h1>Brasil</h1>
+        <span class="periodo">República Federativa do Brasil</span>
+    </div>
+</section>
+
+<main class="page-content">
+    <div class="container">
+
+        <div class="geo-dados-grid" id="dadosBrasil"></div>
+
+        <div class="geo-section">
+            <h2 class="geo-section-title">Biomas</h2>
+            <div class="geo-biomas" id="biomasBrasil"></div>
+        </div>
+
+        <div class="geo-section">
+            <h2 class="geo-section-title">Bandeira</h2>
+            <div class="geo-card-full" id="bandeiraBrasil"></div>
+        </div>
+
+        <div class="geo-section">
+            <h2 class="geo-section-title">Hino Nacional</h2>
+            <div class="geo-card-full" id="hinoBrasil"></div>
+        </div>
+
+        <div class="geo-section">
+            <h2 class="geo-section-title">Cargos Políticos</h2>
+            <div class="geo-card-full" id="cargosBrasil"></div>
+        </div>
+
+        <div class="geo-fonte-nota">
+            <p id="fonteNota"></p>
+        </div>
+
+        <div class="page-nav">
+            <a href="index.html" class="nav-back">← Voltar à Geografia</a>
+            <a href="estados.html">Estados →</a>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p><strong>Brasil — Dados Geográficos</strong></p>
+        <p>Dados: IBGE, PNUD, IPEA | Última atualização: Junho de 2026</p>
+        <p><a href="../../index.html">← Voltar à Linha do Tempo</a></p>
+    </div>
+</footer>
+
+<script src="../../script.js"></script>
+<script src="dados/brasil.js"></script>
+<script src="dados/cargos-desc.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const b = BRASIL;
+
+    const formatNum = n => n.toLocaleString('pt-BR');
+    const formatPib = n => 'R$ ' + (n / 1e12).toFixed(2) + ' tri';
+
+    const dadosHTML = [
+        { label: 'Capital', value: b.capital },
+        { label: 'População', value: formatNum(b.populacao), sub: b.popAno + ' (' + b.popFonte + ')' },
+        { label: 'Área', value: formatNum(b.area) + ' km²', sub: b.areaFonte },
+        { label: 'Densidade', value: b.densidade + ' hab/km²', sub: b.densFonte },
+        { label: 'População Urbana', value: b.populacaoUrbana, sub: b.popUrbFonte },
+        { label: 'PIB', value: formatPib(b.pib), sub: b.pibAno + ' (' + b.pibFonte + ')' },
+        { label: 'PIB per capita', value: 'R$ ' + formatNum(b.pibPerCapita), sub: b.pibpcFonte },
+        { label: 'IDH', value: b.idh, sub: b.idhAno + ' (posição ' + b.idhPosicao + 'ª) — ' + b.idhFonte },
+        { label: 'Coeficiente Gini', value: b.gini, sub: b.giniAno + ' — ' + b.giniFonte },
+        { label: 'Renda Média', value: 'R$ ' + formatNum(b.rendaMedia), sub: b.rendaMedFonte },
+        { label: 'Moeda', value: b.moeda },
+        { label: 'Governo', value: b.governo, sub: b.govFonte },
+        { label: 'Estados', value: b.numEstados + ' + DF' },
+        { label: 'Municípios', value: formatNum(b.numMunicipios), sub: b.numMunFonte },
+        { label: 'Litoral', value: formatNum(b.litoral) + ' km', sub: b.litoralFonte },
+        { label: 'Clima', value: b.clima },
+    ].map(d => '<div class="geo-dado-card"><div class="geo-dado-label">' + d.label + '</div><div class="geo-dado-value">' + d.value + '</div>' + (d.sub ? '<div class="geo-dado-sub">' + d.sub + '</div>' : '') + '</div>').join('');
+
+    document.getElementById('dadosBrasil').innerHTML = dadosHTML;
+
+    document.getElementById('biomasBrasil').innerHTML = b.biomas.map(bi => '<div class="geo-bioma-item"><strong>' + bi.nome + '</strong><span>' + bi.areaPct + '% do território</span></div>').join('') + '<p class="geo-fonte" style="margin-top:10px;grid-column:1/-1;">Fonte: ' + b.biomaFonte + '</p>';
+
+    const flagSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 504" style="width:300px;height:210px;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,0.2);background:#fff;"><rect width="720" height="504" fill="#009c3b"/><polygon points="360,36 684,252 360,468 36,252" fill="#ffcc00"/><circle cx="360" cy="252" r="150" fill="#002776"/><path d="M210,230 C310,290 410,290 510,230 C510,240 410,300 310,300 C210,300 210,240 210,230 Z" fill="#fff"/><text x="360" y="256" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#002776">Ordem e Progresso</text></svg>';
+    document.getElementById('bandeiraBrasil').innerHTML = '<div class="geo-band-wrap">' + flagSvg + '<div class="geo-band-desc">' + b.bandeira.descricao + '</div></div><div class="geo-band-detalhes"><p><strong>Verde:</strong> ' + b.bandeira.verde + '</p><p><strong>Amarelo:</strong> ' + b.bandeira.amarelo + '</p><p><strong>Azul:</strong> ' + b.bandeira.azul + '</p><p><strong>Branco:</strong> ' + b.bandeira.branco + '</p><p><strong>Estrelas:</strong> ' + b.bandeira.estrelas + '</p><p><strong>Lema:</strong> ' + b.bandeira.lema + '</p><p><strong>Adoção:</strong> ' + b.bandeira.adocao + '</p><p><strong>Criação:</strong> ' + b.bandeira.criador + '</p><p><strong>Desenho:</strong> ' + b.bandeira.desenho + '</p><p class="geo-fonte">Fonte: ' + b.bandeira.bandFonte + '</p></div>';
+
+    document.getElementById('hinoBrasil').innerHTML = '<p><strong>Título:</strong> ' + b.hino.titulo + '</p><p><strong>Letra:</strong> ' + b.hino.letra + '</p><p><strong>Música:</strong> ' + b.hino.musica + '</p><p><strong>Adoção:</strong> ' + b.hino.adocao + '</p><pre class="hino-letra">' + b.hino.estrofes.join('\n\n') + '</pre><p class="geo-fonte">Fonte: ' + b.hino.hinoFonte + '</p>';
+
+    const fmtM = n => 'R$ ' + n.toLocaleString('pt-BR', {minimumFractionDigits:2,maximumFractionDigits:2});
+    const cargos = b.cargos;
+    const cargosKeys = Object.keys(cargos);
+    const mapKeyToDesc = {
+        presidente:'presidente', vicePresidente:'vicePresidente',
+        senadores:'senador', deputadosFederais:'deputadoFederal',
+        deputadosEstaduais:'deputadoEstadual', governadores:'governador',
+        viceGovernadores:'viceGovernador', prefeitos:'prefeito',
+        vicePrefeitos:'vicePrefeito', vereadores:'vereador'
+    };
+    document.getElementById('cargosBrasil').innerHTML = '<div class="cargos-tabela-wrap"><table class="cargos-tabela"><thead><tr><th>Cargo</th><th>Quantidade</th><th>Salário (mês)</th><th>Custo Mensal</th><th>Custo Anual*</th><th>Fonte</th></tr></thead><tbody>' + cargosKeys.map(k => {
+        const c = cargos[k];
+        const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase()).trim();
+        const custoMes = c.qtd * c.salario;
+        const custoAno = custoMes * 13.33;
+        return '<tr><td>' + label + '</td><td class="cargos-num">' + c.qtd.toLocaleString('pt-BR') + '</td><td class="cargos-num">' + fmtM(c.salario) + '</td><td class="cargos-num">' + fmtM(custoMes) + '</td><td class="cargos-num">' + fmtM(custoAno) + '</td><td class="cargos-fonte">' + c.fonte + '</td></tr>';
+    }).join('') + '</tbody></table></div>'
+    + '<details class="cargos-details" style="margin-top:20px;"><summary>Atribuições, direitos e deveres de cada cargo</summary>'
+    + '<div class="cargos-desc">'
+    + cargosKeys.filter(k => mapKeyToDesc[k] && CARGOS_DESC[mapKeyToDesc[k]]).map(k => {
+        const desc = CARGOS_DESC[mapKeyToDesc[k]];
+        const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase()).trim();
+        return '<div class="cargos-desc-item"><strong>' + label + '</strong> (' + cargos[k].qtd.toLocaleString('pt-BR') + ')<p>' + desc.descricao + '</p></div>';
+    }).join('')
+    + '</div></details>'
+    + '<p class="geo-fonte" style="margin-top:10px;"><strong>*Custo Anual:</strong> salário × 13,33 (13 salários + ⅓ férias). <strong>Nota:</strong> ' + b.cargosFonteGeral + ' Valores não incluem verbas indenizatórias, gabinete, passagens, auxílio-moradia e demais benefícios.</p>';
+
+    document.getElementById('fonteNota').innerHTML = '<strong>Última atualização:</strong> ' + b.ultimaAtualizacao + ' | <strong>Observação:</strong> ' + b.observacao;
+});
+</script>
+</body>
+</html>
