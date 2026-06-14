@@ -1,4 +1,4 @@
-const BRASIL = {
+var BRASIL = {
     nome: "República Federativa do Brasil",
     nomeCurto: "Brasil",
     capital: "Brasília (Distrito Federal)",

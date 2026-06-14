@@ -906,19 +906,29 @@ body {
     margin: 15px 0;
 }
 
-.geo-muni-item {
+.geo-muni-card {
     background: var(--branco);
     border-radius: 8px;
-    padding: 12px 15px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: var(--transicao);
+    overflow: hidden;
+}
+
+.geo-muni-card:hover {
+    box-shadow: var(--sombra);
+}
+
+.geo-muni-header {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding: 12px 15px;
+    cursor: pointer;
     transition: var(--transicao);
 }
 
-.geo-muni-item:hover {
-    box-shadow: var(--sombra);
+.geo-muni-header:hover {
+    filter: brightness(0.97);
 }
 
 .geo-muni-nome {
@@ -935,6 +945,14 @@ body {
     font-size: 0.7rem;
     font-weight: 700;
     flex-shrink: 0;
+}
+
+.muni-cargos-details {
+    padding: 0 15px 12px;
+}
+
+.muni-cargos-details[open] {
+    display: block;
 }
 
 .geo-muni-pop {
@@ -1075,6 +1093,36 @@ body {
 .cargos-tabela-mini td:nth-child(3) {
     text-align: right;
     white-space: nowrap;
+}
+
+.cargos-total td {
+    border-top: 2px solid var(--azul);
+    font-weight: 700;
+    background: var(--azul-claro);
+}
+.cargos-total td small {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: #666;
+}
+
+.geo-custo-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--verde-escuro);
+    background: #e8f5e9;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.geo-estado-header {
+    cursor: pointer;
+}
+.geo-estado-header:hover {
+    filter: brightness(0.97);
 }
 
 .cargos-desc {

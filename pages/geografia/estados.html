@@ -75,10 +75,18 @@
 <script>
 (function() {
     try {
+        var SAL = { gov: 35000, viceGov: 25000, sen: 39293.32, depFed: 39293.32, depEst: 29469.99, prefeito: 20000, vicePref: 12000, ver: 10000 };
         var formatNum = function(n) { return n.toLocaleString('pt-BR'); };
+        var fmtDin = function(n) { return n.toLocaleString('pt-BR', {minimumFractionDigits:2,maximumFractionDigits:2}); };
         var regioes = [...new Set(ESTADOS.map(function(e) { return e.regiao; }))].sort();
         var selRegiao = document.getElementById('regiaoFilter');
         regioes.forEach(function(r) { var o = document.createElement('option'); o.value = r; o.textContent = r; selRegiao.appendChild(o); });
+
+        function calcCustos(c) {
+            var mes = SAL.gov * 1 + SAL.viceGov * 1 + SAL.sen * 3 + SAL.depFed * c.deputadosFederais + SAL.depEst * c.deputadosEstaduais + SAL.prefeito * c.prefeitos + SAL.ver * c.vereadores;
+            var ano = mes * 13.33;
+            return { mes: Math.round(mes), ano: Math.round(ano) };
+        }
 
         function renderEstados() {
             var search = document.getElementById('estadoSearch').value.toLowerCase();
@@ -100,10 +108,14 @@
             var html = '';
             for (var i = 0; i < filtered.length; i++) {
                 var e = filtered[i];
+                var custos = calcCustos(e.cargos);
+                var custoStr = 'R$ ' + fmtDin(custos.mes) + '/mês';
                 html += '<div class="geo-estado-card reveal" id="card-' + e.sigla + '" style="border-left:5px solid ' + e.regiaoCor + '">'
-                    + '<div class="geo-estado-header">'
+                    + '<div class="geo-estado-header" onclick="var d=this.parentNode.querySelector(\'.cargos-details\');if(d){d.open=!d.open;if(d.open)d.scrollIntoView({behavior:\'smooth\',block:\'nearest\'})}">'
                     + '<span class="geo-estado-sigla" style="background:' + e.regiaoCor + '">' + e.sigla + '</span>'
-                    + '<h3>' + e.nome + '</h3></div>'
+                    + '<h3>' + e.nome + '</h3>'
+                    + '<span class="geo-custo-badge">💰 ' + custoStr + '</span>'
+                    + '</div>'
                     + '<div class="geo-estado-body">'
                     + '<p><strong>Capital:</strong> ' + e.capital + '</p>'
                     + '<p><strong>Região:</strong> ' + e.regiao + '</p>'
@@ -123,13 +135,14 @@
                 if (e.cargos) {
                     html += '<details class="cargos-details"><summary>Cargos políticos e custos</summary>'
                         + '<table class="cargos-tabela-mini">'
-                        + '<tr><td>Governador</td><td>1</td><td>~R$ 35.000/mês</td></tr>'
-                        + '<tr><td>Vice-Governador</td><td>1</td><td>~R$ 25.000/mês</td></tr>'
-                        + '<tr><td>Senadores</td><td>3</td><td>R$ 39.293,32/mês</td></tr>'
-                        + '<tr><td>Deputados Federais</td><td>' + e.cargos.deputadosFederais + '</td><td>R$ 39.293,32/mês</td></tr>'
-                        + '<tr><td>Deputados Estaduais</td><td>' + e.cargos.deputadosEstaduais + '</td><td>~R$ 29.469,99/mês</td></tr>'
-                        + '<tr><td>Prefeitos</td><td>' + e.cargos.prefeitos + '</td><td>~R$ 20.000/mês (média)</td></tr>'
-                        + '<tr><td>Vereadores</td><td>' + formatNum(e.cargos.vereadores) + '</td><td>~R$ 10.000/mês (média)</td></tr>'
+                        + '<tr><td>Governador</td><td>1</td><td>~R$ 35.000/mês</td><td>R$ ' + fmtDin(SAL.gov * 1) + '</td></tr>'
+                        + '<tr><td>Vice-Governador</td><td>1</td><td>~R$ 25.000/mês</td><td>R$ ' + fmtDin(SAL.viceGov * 1) + '</td></tr>'
+                        + '<tr><td>Senadores</td><td>3</td><td>R$ 39.293,32/mês</td><td>R$ ' + fmtDin(SAL.sen * 3) + '</td></tr>'
+                        + '<tr><td>Deputados Federais</td><td>' + e.cargos.deputadosFederais + '</td><td>R$ 39.293,32/mês</td><td>R$ ' + fmtDin(SAL.depFed * e.cargos.deputadosFederais) + '</td></tr>'
+                        + '<tr><td>Deputados Estaduais</td><td>' + e.cargos.deputadosEstaduais + '</td><td>~R$ 29.469,99/mês</td><td>R$ ' + fmtDin(SAL.depEst * e.cargos.deputadosEstaduais) + '</td></tr>'
+                        + '<tr><td>Prefeitos</td><td>' + e.cargos.prefeitos + '</td><td>~R$ 20.000/mês (média)</td><td>R$ ' + fmtDin(SAL.prefeito * e.cargos.prefeitos) + '</td></tr>'
+                        + '<tr><td>Vereadores</td><td>' + formatNum(e.cargos.vereadores) + '</td><td>~R$ 10.000/mês (média)</td><td>R$ ' + fmtDin(SAL.ver * e.cargos.vereadores) + '</td></tr>'
+                        + '<tr class="cargos-total"><td><strong>TOTAL</strong></td><td></td><td></td><td><strong>R$ ' + fmtDin(custos.mes) + '/mês</strong><br><small>R$ ' + fmtDin(custos.ano) + '/ano*</small></td></tr>'
                         + '</table>'
                         + '<div class="cargos-desc">'
                         + '<h4>Atribuições, direitos e deveres</h4>'

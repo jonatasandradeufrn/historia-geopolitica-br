@@ -1,4 +1,4 @@
-const CARGOS_DESC = {
+var CARGOS_DESC = {
     presidente: {
         titulo: "Presidente da República",
         descricao: "Chefe do Poder Executivo federal e Chefe de Estado, com mandato de 4 anos. Atribuições: sancionar e vetar leis, comandar as Forças Armadas, nomear ministros e autoridades, representar o Brasil internacionalmente, propor o orçamento da União e editar medidas provisórias. Obrigações: cumprir e fazer cumprir a Constituição Federal, prestar contas ao Congresso Nacional. Direitos: foro privilegiado no STF (crimes comuns), imunidade relativa (não pode ser processado por atos estranhos ao mandato durante o exercício). Deveres: probidade, transparência, prestação anual de contas ao TCU."

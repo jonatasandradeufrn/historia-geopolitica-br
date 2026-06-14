@@ -77,65 +77,87 @@
 <script src="dados/municipios.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const PER_PAGE = 50;
-    const REGIOES = ['Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'];
-    const REGIOES_NOME = {'N':'Norte','NE':'Nordeste','CO':'Centro-Oeste','SE':'Sudeste','S':'Sul'};
+    var PER_PAGE = 50;
+    var REGIOES = ['Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'];
+    var REGIOES_NOME = {'N':'Norte','NE':'Nordeste','CO':'Centro-Oeste','SE':'Sudeste','S':'Sul'};
+    var SAL_PREF = 20000, SAL_VICE_PREF = 12000, SAL_VER = 10000;
 
-    const UF_CORES = {AC:"#4CAF50",AL:"#F44336",AM:"#4CAF50",AP:"#4CAF50",BA:"#F44336",CE:"#F44336",DF:"#FF9800",ES:"#2196F3",GO:"#FF9800",MA:"#F44336",MG:"#2196F3",MS:"#FF9800",MT:"#FF9800",PA:"#4CAF50",PB:"#F44336",PE:"#F44336",PI:"#F44336",PR:"#9C27B0",RJ:"#2196F3",RN:"#F44336",RO:"#4CAF50",RR:"#4CAF50",RS:"#9C27B0",SC:"#9C27B0",SE:"#F44336",SP:"#2196F3",TO:"#4CAF50"};
+    var UF_CORES = {AC:"#4CAF50",AL:"#F44336",AM:"#4CAF50",AP:"#4CAF50",BA:"#F44336",CE:"#F44336",DF:"#FF9800",ES:"#2196F3",GO:"#FF9800",MA:"#F44336",MG:"#2196F3",MS:"#FF9800",MT:"#FF9800",PA:"#4CAF50",PB:"#F44336",PE:"#F44336",PI:"#F44336",PR:"#9C27B0",RJ:"#2196F3",RN:"#F44336",RO:"#4CAF50",RR:"#4CAF50",RS:"#9C27B0",SC:"#9C27B0",SE:"#F44336",SP:"#2196F3",TO:"#4CAF50"};
 
-    const ufs = [...new Set(MUNICIPIOS.map(m => m.uf))].sort();
-    const selUF = document.getElementById('muniUF');
-    ufs.forEach(u => { const o = document.createElement('option'); o.value = u; o.textContent = u; selUF.appendChild(o); });
+    var ufs = [...new Set(MUNICIPIOS.map(function(m) { return m.uf; }))].sort();
+    var selUF = document.getElementById('muniUF');
+    ufs.forEach(function(u) { var o = document.createElement('option'); o.value = u; o.textContent = u; selUF.appendChild(o); });
 
-    const selReg = document.getElementById('muniRegiao');
-    REGIOES.forEach(r => { const o = document.createElement('option'); o.value = r; o.textContent = r; selReg.appendChild(o); });
+    var selReg = document.getElementById('muniRegiao');
+    REGIOES.forEach(function(r) { var o = document.createElement('option'); o.value = r; o.textContent = r; selReg.appendChild(o); });
 
-    let currentPage = 1;
+    var currentPage = 1;
+    var formatNum = function(n) { return n.toLocaleString('pt-BR'); };
+    var fmtDin = function(n) { return n.toLocaleString('pt-BR', {minimumFractionDigits:2,maximumFractionDigits:2}); };
 
     function getFiltered() {
-        const search = document.getElementById('muniSearch').value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const uf = document.getElementById('muniUF').value;
-        const reg = document.getElementById('muniRegiao').value;
+        var search = document.getElementById('muniSearch').value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        var uf = document.getElementById('muniUF').value;
+        var reg = document.getElementById('muniRegiao').value;
 
-        return MUNICIPIOS.filter(m => {
+        return MUNICIPIOS.filter(function(m) {
             if (uf !== 'all' && m.uf !== uf) return false;
             if (reg !== 'all') {
-                const regNome = REGIOES_NOME[m.reg] || m.reg;
+                var regNome = REGIOES_NOME[m.reg] || m.reg;
                 if (regNome !== reg && m.reg !== reg) return false;
             }
             if (search) {
-                const nome = m.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                if (!nome.includes(search)) return false;
+                var nome = m.n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                if (nome.indexOf(search) === -1) return false;
             }
             return true;
         });
     }
 
     function render() {
-        const filtered = getFiltered();
-        const total = filtered.length;
-        const totalPages = Math.ceil(total / PER_PAGE);
+        var filtered = getFiltered();
+        var total = filtered.length;
+        var totalPages = Math.ceil(total / PER_PAGE);
         if (currentPage > totalPages) currentPage = 1;
 
         document.getElementById('muniCount').textContent = total + ' municípios';
 
-        const start = (currentPage - 1) * PER_PAGE;
-        const page = filtered.slice(start, start + PER_PAGE);
+        var start = (currentPage - 1) * PER_PAGE;
+        var page = filtered.slice(start, start + PER_PAGE);
 
-        document.getElementById('muniContainer').innerHTML = page.map(m => `
-            <div class="geo-muni-item">
-                <span class="geo-muni-nome">${m.n}</span>
-                <span class="geo-muni-uf" style="background:${UF_CORES[m.uf] || '#999'}">${m.uf}</span>
-                <a class="geo-muni-pop" href="https://ibge.gov.br" target="_blank" rel="noopener" title="Consultar dados no IBGE">Consulte IBGE ↗</a>
-            </div>
-        `).join('');
+        var html = '';
+        for (var i = 0; i < page.length; i++) {
+            var m = page[i];
+            var ver = m.ver || 15;
+            var custoMes = SAL_PREF + SAL_VICE_PREF + SAL_VER * ver;
+            var custoAno = custoMes * 13.33;
+            html += '<div class="geo-muni-card">'
+                + '<div class="geo-muni-header" onclick="var d=this.parentNode.querySelector(\'.muni-cargos-details\');if(d)d.open=!d.open;">'
+                + '<span class="geo-muni-nome">' + m.n + '</span>'
+                + '<span class="geo-muni-uf" style="background:' + (UF_CORES[m.uf] || '#999') + '">' + m.uf + '</span>'
+                + '<span class="geo-custo-badge">💰 R$ ' + fmtDin(custoMes) + '/mês</span>'
+                + '</div>'
+                + '<details class="muni-cargos-details cargos-details"><summary>Políticos e custos</summary>'
+                + '<table class="cargos-tabela-mini">'
+                + '<tr><td>Prefeito</td><td>1</td><td>~R$ 20.000/mês</td><td>R$ ' + fmtDin(SAL_PREF) + '</td></tr>'
+                + '<tr><td>Vice-Prefeito</td><td>1</td><td>~R$ 12.000/mês</td><td>R$ ' + fmtDin(SAL_VICE_PREF) + '</td></tr>'
+                + '<tr><td>Vereadores</td><td>' + ver + '</td><td>~R$ 10.000/mês</td><td>R$ ' + fmtDin(SAL_VER * ver) + '</td></tr>'
+                + '<tr class="cargos-total"><td><strong>TOTAL</strong></td><td></td><td></td><td><strong>R$ ' + fmtDin(custoMes) + '/mês</strong><br><small>R$ ' + fmtDin(Math.round(custoAno)) + '/ano*</small></td></tr>'
+                + '</table>'
+                + '<div class="cargos-desc" style="border:none;padding:0;margin-top:5px;">'
+                + '<div class="cargos-desc-item"><strong>Prefeito</strong><p>Chefe do Poder Executivo municipal. Administra a cidade, executa leis e serviços públicos. Deve prestar contas ao TCM. Foro no TJ.</p></div>'
+                + '<div class="cargos-desc-item"><strong>Vereadores</strong><p>Integram a Câmara Municipal. Legislam sobre interesse local, fiscalizam o prefeito, aprovam orçamento. Inviolabilidade no exercício do mandato.</p></div>'
+                + '<p class="geo-fonte">Salários são estimativas baseadas em médias nacionais — consulte dados oficiais. Vereadores: ' + ver + ' (CF Art. 29 conforme população).</p>'
+                + '</div></details></div>';
+        }
+        document.getElementById('muniContainer').innerHTML = html;
 
-        let pag = '<button class="geo-page-btn" data-page="' + (currentPage - 1) + '"' + (currentPage <= 1 ? ' disabled' : '') + '>‹ Anterior</button>';
+        var pag = '<button class="geo-page-btn" data-page="' + (currentPage - 1) + '"' + (currentPage <= 1 ? ' disabled' : '') + '>‹ Anterior</button>';
         pag += '<span class="geo-page-info">Página ' + currentPage + ' de ' + totalPages + '</span>';
         pag += '<button class="geo-page-btn" data-page="' + (currentPage + 1) + '"' + (currentPage >= totalPages ? ' disabled' : '') + '>Próxima ›</button>';
         document.getElementById('muniPagination').innerHTML = pag;
 
-        document.querySelectorAll('.geo-page-btn').forEach(btn => {
+        document.querySelectorAll('.geo-page-btn').forEach(function(btn) {
             btn.addEventListener('click', function() {
                 if (this.disabled) return;
                 currentPage = parseInt(this.dataset.page);
