@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="História, Geografia e Geopolítica do Brasil - Explore o Brasil completo">
-    <title>História do Brasil - Geografia - Geopolítica</title>
+    <meta name="description" content="Raiox-Brasil — História, Geografia e Geopolítica do Brasil completo.">
+    <title>Raiox-Brasil — História, Geografia e Geopolítica</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇧🇷</text></svg>">
 </head>
@@ -12,52 +12,89 @@
 
 <header class="header">
     <div class="container header-inner">
-        <h1><a href="index.html"><span>📜</span> História do Brasil</a></h1>
+        <h1>
+            <a href="index.html">
+                <img src="img/bandeira-brasil.svg" alt="Bandeira do Brasil" class="header-flag-img">
+                <span class="header-brand-text">
+                    <span class="header-brand-name">Raiox<span>-Brasil</span></span>
+                    <span class="header-brand-sub">História · Geografia · Geopolítica</span>
+                </span>
+            </a>
+        </h1>
         <nav class="header-nav">
-            <a href="pages/historia/index.html" style="background:var(--verde);color:#fff;">História</a>
-            <a href="pages/geografia/index.html" style="background:var(--amarelo);color:var(--azul-escuro);">Geografia</a>
-            <a href="pages/geopolitica/index.html" style="background:var(--azul);color:#fff;">Geopolítica</a>
+            <a href="pages/historia/index.html">História</a>
+            <a href="pages/geografia/index.html">Geografia</a>
+            <a href="pages/geopolitica/index.html">Geopolítica</a>
         </nav>
     </div>
 </header>
 
-<main class="container">
-    <section style="text-align:center;padding:60px 0 30px;">
-        <h1 style="font-size:2.5rem;color:var(--azul);margin-bottom:15px;">Brasil Completo</h1>
-        <p style="color:var(--texto-claro);max-width:550px;margin:0 auto;font-size:1.05rem;">Explore a história, a geografia e a geopolítica do Brasil em um só lugar.</p>
-    </section>
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-flag-wrapper">
+                <img src="img/bandeira-brasil.svg" alt="Bandeira do Brasil">
+            </div>
 
-    <div class="global-cards">
-        <a href="pages/historia/index.html" class="global-card" style="border-top:5px solid var(--verde);">
-            <div class="global-card-icon">📜</div>
-            <h2>História do Brasil</h2>
-            <p>Linha do tempo interativa do descobrimento aos dias atuais. Colônia, Império, República, Vargas, Ditadura e Nova República em uma narrativa completa.</p>
-            <span class="global-card-btn" style="background:var(--verde);">Explorar História →</span>
-        </a>
-        <a href="pages/geografia/index.html" class="global-card" style="border-top:5px solid var(--azul);">
-            <div class="global-card-icon">🌎</div>
-            <h2>Geografia do Brasil</h2>
-            <p>Dados completos do Brasil, 26 estados + DF, e 5.570 municípios. População, área, PIB, IDH, cargos políticos, bandeiras e muito mais.</p>
-            <span class="global-card-btn" style="background:var(--azul);">Explorar Geografia →</span>
-        </a>
-        <a href="pages/geopolitica/index.html" class="global-card" style="border-top:5px solid #1565C0;">
-            <div class="global-card-icon">🌐</div>
-            <h2>Geopolítica</h2>
-            <p>Relações internacionais, política externa brasileira, fronteiras, blocos econômicos, questões ambientais globais e análises geopolíticas.</p>
-            <span class="global-card-btn" style="background:#1565C0;">Explorar Geopolítica →</span>
-        </a>
+            <div class="hero-copy">
+                <span class="hero-eyebrow">Portal do Brasil</span>
+                <h1>Raio<em>x</em>-<strong>Brasil</strong></h1>
+                <p>O portal mais completo sobre o Brasil — mais de 500 anos de história, dados de 26 estados, Distrito Federal e 5.570 municípios, com análises geopolíticas e fontes oficiais.</p>
+                <div class="hero-badges">
+                    <span class="hero-badge hero-badge-verde">📜 História</span>
+                    <span class="hero-badge hero-badge-amarelo">🌎 Geografia</span>
+                    <span class="hero-badge hero-badge-azul">🌐 Geopolítica</span>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-    <div class="page-nav" style="margin-top:10px;">
-        <span style="color:var(--texto-claro);font-size:0.9rem;">Navegue pelas seções acima ou use o menu no topo da página.</span>
+<!-- CARDS -->
+<section class="home-section">
+    <div class="container">
+        <p class="home-section-title">Explorar seções</p>
+        <div class="global-cards">
+            <a href="pages/historia/index.html" class="global-card global-card-hist">
+                <div class="global-card-icon">📜</div>
+                <h2>História do Brasil</h2>
+                <p>Linha do tempo interativa do descobrimento aos dias atuais. Colônia, Império, República, Vargas, Ditadura e Nova República em uma narrativa completa.</p>
+                <span class="global-card-btn" style="background:var(--verde);">Explorar História →</span>
+            </a>
+            <a href="pages/geografia/index.html" class="global-card global-card-geo">
+                <div class="global-card-icon">🌎</div>
+                <h2>Geografia do Brasil</h2>
+                <p>Dados completos do Brasil, 26 estados + DF e 5.570 municípios. População, área, PIB, IDH, cargos políticos, bandeiras estaduais e muito mais.</p>
+                <span class="global-card-btn" style="background:var(--azul);">Explorar Geografia →</span>
+            </a>
+            <a href="pages/geopolitica/index.html" class="global-card global-card-gpol">
+                <div class="global-card-icon">🌐</div>
+                <h2>Geopolítica</h2>
+                <p>Relações internacionais, política externa brasileira, fronteiras, blocos econômicos, questões ambientais globais e análises geopolíticas.</p>
+                <span class="global-card-btn" style="background:#1565C0;">Explorar Geopolítica →</span>
+            </a>
+        </div>
     </div>
-</main>
+</section>
 
 <footer class="footer">
     <div class="container">
-        <p><strong>História, Geografia e Geopolítica do Brasil</strong></p>
-        <p>Um projeto de documentação livre e aberta. Dados: IBGE, PNUD, IPEA.</p>
-        <p style="font-size:0.8rem;color:var(--texto-claro);">Última atualização: Junho de 2026</p>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">
+                    <span style="font-size:1.5rem">🇧🇷</span>
+                    <span class="footer-brand-name">Raiox<span>-Brasil</span></span>
+                </div>
+                <p style="margin-top:8px;">Um projeto de documentação livre e aberta.</p>
+                <p>Dados: IBGE, PNUD, IPEA · Junho de 2026</p>
+            </div>
+            <div class="footer-links" style="margin-top:8px;">
+                <a href="pages/historia/index.html">História</a>
+                <a href="pages/geografia/index.html">Geografia</a>
+                <a href="pages/geopolitica/index.html">Geopolítica</a>
+            </div>
+        </div>
     </div>
 </footer>
 
