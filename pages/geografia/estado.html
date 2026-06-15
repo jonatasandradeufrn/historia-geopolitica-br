@@ -79,9 +79,9 @@
             if (ESTADOS[i].sigla === uf) { estado = ESTADOS[i]; break; }
         }
         if (!estado) { document.querySelector('.page-content').innerHTML = '<div class="container"><div class="geo-fonte-nota"><strong>Estado não encontrado.</strong> <a href="estados.html">Voltar para lista de estados</a></div></div>'; return; }
-        if (typeof GASTOS_PUBLICOS === 'undefined') { var GASTOS_PUBLICOS = { estados: {} }; }
-        if (typeof HISTORIA_ESTADOS === 'undefined') { var HISTORIA_ESTADOS = {}; }
-        if (typeof HINOS_ESTADUAIS === 'undefined') { var HINOS_ESTADUAIS = {}; }
+        if (typeof GASTOS_PUBLICOS === 'undefined') { GASTOS_PUBLICOS = { estados: {} }; }
+        if (typeof HISTORIA_ESTADOS === 'undefined') { HISTORIA_ESTADOS = {}; }
+        if (typeof HINOS_ESTADUAIS === 'undefined') { HINOS_ESTADUAIS = {}; }
 
         var formatNum = function(n) { return n.toLocaleString('pt-BR'); };
         var fmtDin = function(n) { return n.toLocaleString('pt-BR', {minimumFractionDigits:2,maximumFractionDigits:2}); };
