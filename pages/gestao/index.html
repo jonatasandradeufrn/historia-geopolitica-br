@@ -34,73 +34,23 @@
     <div class="container">
         <section class="scope-note" aria-label="Escopo e limites">
             <strong>Como ler esta página</strong>
-            <p>As séries começam em anos diferentes: o IDEB foi criado em 2007 e tem resultados a partir de 2005; a série de feminicídios depende dos registros policiais; insegurança alimentar é medida em pesquisas pontuais. Lacunas não foram preenchidas por estimativas. O cadastro de ministros abaixo é uma seleção documentada, não a lista completa de todos os titulares. Não há nota individual de “bom” ou “ruim” para ministros sem uma métrica comparável que sustente essa atribuição.</p>
+            <p>Este módulo organiza os dados por governo e por estrutura ministerial. Quando a legislação muda a pasta, a página registra nome, extinção, recriação e competências legais para o período; isso ajuda a separar reorganização administrativa de criação ou destruição real de políticas públicas. Quando não há base oficial estável, o texto identifica a limitação e mantém a descrição factual de forma cautelosa.</p>
         </section>
 
         <section class="mandates-section" aria-labelledby="mandates-title">
             <div class="section-heading">
                 <div>
                     <p class="eyebrow">Poder Executivo</p>
-                    <h2 id="mandates-title">Presidentes e governos</h2>
+                    <h2 id="mandates-title">Governos e estruturas ministeriais</h2>
                 </div>
-                <label class="filter-control" for="mandateFilter">Filtrar mandato
+                <label class="filter-control" for="mandateFilter">Filtrar governo
                     <select id="mandateFilter">
                         <option value="all">Todos</option>
                     </select>
                 </label>
             </div>
-            <p class="results-explainer">“Avanço” e “recuo” comparam apenas o primeiro e o último ponto disponível dentro do mandato. Um resultado ausente significa que a série não permite a comparação.</p>
+            <p class="results-explainer">Cada bloco abaixo reúne: início e fim, ministros, nomeações e saídas do STF, ministérios existentes, ministérios criados/extintos, funções legais e custo mensal/anual estimado pelo orçamento federal do período.</p>
             <div id="mandateList" class="mandate-list"></div>
-        </section>
-
-        <section class="ministry-changes" aria-labelledby="ministry-changes-title">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">Organização administrativa</p>
-                    <h2 id="ministry-changes-title">Ministérios criados, extintos e reorganizados</h2>
-                </div>
-            </div>
-            <p class="results-explainer">Recorte de mudanças estruturais confirmadas em leis e atos oficiais. Fusão, mudança de nome e extinção temporária são identificadas como reorganizações, não como criação ou extinção definitiva. A lista não substitui o inventário completo de titulares.</p>
-            <div class="ministry-change-list">
-                <article class="ministry-change-item">
-                    <h3>Fernando Henrique Cardoso · 1995–2002</h3>
-                    <p><strong>Criado:</strong> Ministério da Defesa, em 1999, reunindo a coordenação civil das Forças Armadas.</p>
-                    <p><strong>Reorganizados:</strong> os antigos ministérios militares foram substituídos pela estrutura de Defesa; a mudança não extinguiu as Forças Armadas, que passaram a se subordinar ao Ministério da Defesa.</p>
-                    <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp97.htm" target="_blank" rel="noopener">Lei Complementar 97/1999</a>
-                </article>
-                <article class="ministry-change-item">
-                    <h3>Luiz Inácio Lula da Silva · 2003–2010</h3>
-                    <p><strong>Criados na estrutura de 2003:</strong> Ministérios das Cidades e do Turismo, entre outras pastas previstas na reorganização da Presidência.</p>
-                    <p><strong>Criado em 2004:</strong> Ministério do Desenvolvimento Social e Combate à Fome, que reuniu atribuições de assistência e programas sociais.</p>
-                    <a href="https://www.planalto.gov.br/ccivil_03/leis/2003/l10.683.htm" target="_blank" rel="noopener">Lei 10.683/2003</a> ·
-                    <a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l10.869.htm" target="_blank" rel="noopener">Lei 10.869/2004</a>
-                </article>
-                <article class="ministry-change-item">
-                    <h3>Dilma Rousseff · 2011–2016</h3>
-                    <p><strong>Reorganizados:</strong> em 2015, políticas para mulheres, igualdade racial e direitos humanos foram reunidas em uma pasta ministerial; a reforma administrativa também alterou nomes e competências de outros ministérios.</p>
-                    <p>A consolidação legal ocorreu em 2016. A mudança reuniu estruturas existentes; não significa que essas políticas públicas tenham sido criadas naquele ano.</p>
-                    <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2016/lei/l13266.htm" target="_blank" rel="noopener">Lei 13.266/2016</a>
-                </article>
-                <article class="ministry-change-item">
-                    <h3>Michel Temer · 2016–2018</h3>
-                    <p><strong>Reorganizados:</strong> a estrutura ministerial foi alterada em 2016. O Ministério da Cultura foi inicialmente extinto e incorporado ao da Educação, mas recriado dias depois; portanto, não deve ser descrito como extinção permanente.</p>
-                    <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2016/mpv/mpv726.htm" target="_blank" rel="noopener">MP 726/2016</a> ·
-                    <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2016/mpv/mpv728.htm" target="_blank" rel="noopener">MP 728/2016</a> ·
-                    <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2016/lei/l13341.htm" target="_blank" rel="noopener">Lei 13.341/2016</a>
-                </article>
-                <article class="ministry-change-item">
-                    <h3>Jair Bolsonaro · 2019–2022</h3>
-                    <p><strong>Reorganizados:</strong> a Lei 13.844/2019 consolidou atribuições de Fazenda, Planejamento, Indústria e Comércio, Trabalho e Previdência no Ministério da Economia; Cultura e Desenvolvimento Social deixaram de existir como pastas independentes e suas competências foram redistribuídas.</p>
-                    <p>Isso descreve a estrutura administrativa daquele governo, não a extinção das políticas ou serviços dessas áreas.</p>
-                    <a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13844.htm" target="_blank" rel="noopener">Lei 13.844/2019</a>
-                </article>
-                <article class="ministry-change-item">
-                    <h3>Luiz Inácio Lula da Silva · 2023–atual</h3>
-                    <p><strong>Reorganizados ou recriados como pastas próprias:</strong> Igualdade Racial, Mulheres e Cultura voltaram a ter ministérios próprios; foram instituídos o Ministério dos Povos Indígenas e o Ministério de Portos e Aeroportos, separado da pasta de Infraestrutura.</p>
-                    <p>A lei também redistribuiu competências entre ministérios. A estrutura pode mudar por legislação posterior; o texto legal é a referência para cada data.</p>
-                    <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14600.htm" target="_blank" rel="noopener">Lei 14.600/2023</a>
-                </article>
-            </div>
         </section>
 
         <section class="indicators-section" aria-labelledby="indicators-title">
