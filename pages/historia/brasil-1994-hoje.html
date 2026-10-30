@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Governos do Brasil desde a eleição de 1994, fatos documentados e indicadores sociais em séries históricas com fontes.">
+    <title>Brasil, 1994 até hoje — Raiox-Brasil</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="brasil-atual.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇧🇷</text></svg>">
+</head>
+<body>
+<header class="header">
+    <div class="container header-inner">
+        <h1><a href="../../index.html"><img src="../../img/bandeira-brasil.svg" alt="Bandeira do Brasil" class="header-flag-img"><span class="header-brand-text"><span class="header-brand-name">Raiox<span>-Brasil</span></span><span class="header-brand-sub">História · Geografia · Geopolítica</span></span></a></h1>
+        <nav class="header-nav">
+            <a href="index.html" class="ativo-historia">História</a>
+            <a href="../geografia/index.html">Geografia</a>
+            <a href="../geopolitica/index.html">Geopolítica</a>
+        </nav>
+    </div>
+</header>
+
+<section class="page-header">
+    <div class="container">
+        <h1>Brasil, 1994 até hoje</h1>
+        <span class="periodo">Governos, decisões e indicadores</span>
+        <p>Uma leitura por mandato de fatos documentados e séries sociais. Os dados mais recentes disponíveis aqui vão de 2023 a 2024, conforme o indicador. Resultados mostram o que mudou no período; não provam, isoladamente, que um governante causou a mudança.</p>
+    </div>
+</section>
+
+<main class="current-page">
+    <div class="container">
+        <section class="scope-note" aria-label="Escopo e limites">
+            <strong>Como ler esta página</strong>
+            <p>As séries começam em anos diferentes: o IDEB foi criado em 2007 e tem resultados a partir de 2005; a série de feminicídios depende dos registros policiais; insegurança alimentar é medida em pesquisas pontuais. Lacunas não foram preenchidas por estimativas. O cadastro de ministros abaixo é uma seleção documentada, não a lista completa de todos os titulares. Não há nota individual de “bom” ou “ruim” para ministros sem uma métrica comparável que sustente essa atribuição.</p>
+        </section>
+
+        <section class="mandates-section" aria-labelledby="mandates-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Poder Executivo</p>
+                    <h2 id="mandates-title">Presidentes e governos</h2>
+                </div>
+                <label class="filter-control" for="mandateFilter">Filtrar mandato
+                    <select id="mandateFilter">
+                        <option value="all">Todos</option>
+                    </select>
+                </label>
+            </div>
+            <p class="results-explainer">“Avanço” e “recuo” comparam apenas o primeiro e o último ponto disponível dentro do mandato. Um resultado ausente significa que a série não permite a comparação.</p>
+            <div id="mandateList" class="mandate-list"></div>
+        </section>
+
+        <section class="indicators-section" aria-labelledby="indicators-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Séries históricas</p>
+                    <h2 id="indicators-title">Indicadores por setor</h2>
+                </div>
+                <span class="chart-hint">Passe o cursor ou toque nos pontos para ver os valores</span>
+            </div>
+            <div class="indicator-grid">
+                <article class="indicator-panel">
+                    <div class="indicator-title"><span class="indicator-index">01</span><div><h3>Educação</h3><p>IDEB · anos iniciais do ensino fundamental, rede pública</p></div></div>
+                    <div class="chart-wrap"><canvas id="educationChart" role="img" aria-label="Gráfico da série do IDEB nos anos iniciais da rede pública"></canvas></div>
+                    <p class="indicator-note">O IDEB não existia em 1994. A série divulgada pelo INEP começa em 2005 e chega a 2023; não há interpolação dos anos sem prova. <a href="https://www.gov.br/inep/pt-br/assuntos/noticias/ideb" target="_blank" rel="noopener">Fonte: INEP</a>.</p>
+                </article>
+                <article class="indicator-panel">
+                    <div class="indicator-title"><span class="indicator-index">02</span><div><h3>Saúde e violência contra mulheres</h3><p>Feminicídios registrados · número de vítimas</p></div></div>
+                    <div class="chart-wrap"><canvas id="womenChart" role="img" aria-label="Gráfico de feminicídios registrados no Brasil"></canvas></div>
+                    <p class="indicator-note">Registros policiais de 2015 a 2024; número absoluto, não ajustado pela população. Não equivale à totalidade da violência contra mulheres; classificação e notificação afetam a série. <a href="https://forumseguranca.org.br/publicacoes/anuario-brasileiro-de-seguranca-publica/" target="_blank" rel="noopener">Fonte: FBSP</a>.</p>
+                </article>
+                <article class="indicator-panel">
+                    <div class="indicator-title"><span class="indicator-index">03</span><div><h3>Alfabetização</h3><p>Taxa de analfabetismo entre pessoas de 15 anos ou mais</p></div></div>
+                    <div class="chart-wrap"><canvas id="literacyChart" role="img" aria-label="Gráfico da taxa de analfabetismo no Brasil"></canvas></div>
+                    <p class="indicator-note">Pessoas de 15 anos ou mais, 1995 a 2024. Percentual que não sabe ler e escrever um bilhete simples; pesquisas e metodologia podem variar entre anos. <a href="https://sidra.ibge.gov.br/tabela/7113" target="_blank" rel="noopener">Fonte: IBGE/SIDRA</a>.</p>
+                </article>
+                <article class="indicator-panel">
+                    <div class="indicator-title"><span class="indicator-index">04</span><div><h3>Fome e insegurança alimentar</h3><p>Domicílios com algum grau de insegurança alimentar</p></div></div>
+                    <div class="chart-wrap"><canvas id="hungerChart" role="img" aria-label="Gráfico de insegurança alimentar nos domicílios brasileiros"></canvas></div>
+                    <p class="indicator-note">Pesquisas domiciliares de 2004 a 2023; a escala e a cobertura não formam uma série anual contínua. Percentual de domicílios. <a href="https://www.ibge.gov.br/estatisticas/sociais/saude/17270-pnad-continua.html" target="_blank" rel="noopener">Fonte: IBGE</a>.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="sources-section" aria-labelledby="sources-title">
+            <p class="eyebrow">Referências e metodologia</p>
+            <h2 id="sources-title">Fontes para conferência</h2>
+            <ul class="source-list">
+                <li><a href="https://www.gov.br/inep/pt-br/assuntos/noticias/ideb" target="_blank" rel="noopener">INEP — resultados e notas técnicas do IDEB</a></li>
+                <li><a href="https://sidra.ibge.gov.br/tabela/7113" target="_blank" rel="noopener">IBGE/SIDRA — analfabetismo por grupos de idade</a></li>
+                <li><a href="https://www.ibge.gov.br/estatisticas/sociais/saude/17270-pnad-continua.html" target="_blank" rel="noopener">IBGE — PNAD Contínua, educação e segurança alimentar</a></li>
+                <li><a href="https://forumseguranca.org.br/publicacoes/anuario-brasileiro-de-seguranca-publica/" target="_blank" rel="noopener">Fórum Brasileiro de Segurança Pública — Anuário</a></li>
+                <li><a href="https://www.tse.jus.br/eleicoes/eleicoes-anteriores" target="_blank" rel="noopener">TSE — eleições anteriores e resultados</a></li>
+                <li><a href="https://www.planalto.gov.br/" target="_blank" rel="noopener">Presidência da República — legislação e atos oficiais</a></li>
+                <li><a href="https://portal.stf.jus.br/" target="_blank" rel="noopener">Supremo Tribunal Federal — decisões e notícias institucionais</a></li>
+            </ul>
+            <p class="source-method">Valores exibidos são pontos de referência publicados pelas instituições listadas; arredondamentos e revisões podem ocorrer. Compare sempre a nota metodológica da edição original antes de reutilizar os dados.</p>
+        </section>
+    </div>
+</main>
+
+<footer class="footer"><div class="container"><p><a href="index.html">Voltar à linha do tempo da História do Brasil</a></p><p>Raiox-Brasil · Dados apresentados com ressalvas sobre cobertura e comparabilidade.</p></div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="brasil-atual.js"></script>
+</body>
+</html>
