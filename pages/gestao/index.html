@@ -37,6 +37,12 @@
             <p>Este módulo organiza os dados por governo e por estrutura ministerial. Quando a legislação muda a pasta, a página registra nome, extinção, recriação e competências legais para o período; isso ajuda a separar reorganização administrativa de criação ou destruição real de políticas públicas. Quando não há base oficial estável, o texto identifica a limitação e mantém a descrição factual de forma cautelosa.</p>
         </section>
 
+        <div class="page-tabs" role="tablist" aria-label="Conteúdo de Gestão e Ministérios">
+            <button id="governanceTab" class="page-tab" type="button" role="tab" aria-selected="true" aria-controls="governancePanel" tabindex="0">Governos e indicadores</button>
+            <button id="scandalsTab" class="page-tab" type="button" role="tab" aria-selected="false" aria-controls="scandalsPanel" tabindex="-1">Escândalos e controvérsias</button>
+        </div>
+
+        <div id="governancePanel" role="tabpanel" aria-labelledby="governanceTab">
         <section class="mandates-section" aria-labelledby="mandates-title">
             <div class="section-heading">
                 <div>
@@ -83,6 +89,23 @@
                     <p class="indicator-note">Pesquisas domiciliares de 2004 a 2023; a escala e a cobertura não formam uma série anual contínua. Percentual de domicílios. <a href="https://www.ibge.gov.br/estatisticas/sociais/saude/17270-pnad-continua.html" target="_blank" rel="noopener">Fonte: IBGE</a>.</p>
                 </article>
             </div>
+        </section>
+        </div>
+
+        <section id="scandalsPanel" class="scandals-section" role="tabpanel" aria-labelledby="scandalsTab" hidden>
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Registro histórico</p>
+                    <h2 id="scandals-title">Escândalos e controvérsias por governo</h2>
+                </div>
+                <label class="filter-control" for="scandalGovernmentFilter">Filtrar governo
+                    <select id="scandalGovernmentFilter">
+                        <option value="all">Todos</option>
+                    </select>
+                </label>
+            </div>
+            <p class="results-explainer">Seleção de casos de grande repercussão política ou institucional ligados aos governos desta página, incluindo Executivo e órgãos públicos. Não é uma lista exaustiva: não existe um cadastro único de “todos os escândalos”. Acusações, investigações, denúncias e condenações são situações diferentes; cada registro indica o contexto e aponta para fontes institucionais.</p>
+            <div id="scandalList" class="scandal-list" aria-live="polite"></div>
         </section>
 
         <section class="sources-section" aria-labelledby="sources-title">

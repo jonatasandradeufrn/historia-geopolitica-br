@@ -145,7 +145,9 @@ const governments = [
         custoMensal: 'R$ 15 bilhões a R$ 23 bilhões por mês',
         ministracoes: [
             ['Luiz Henrique Mandetta', 'Saúde', 'Foi ministro no início da pandemia e saiu após conflitos públicos com o governo.'],
+            ['Nelson Teich', 'Saúde', 'Sucedeu Mandetta e deixou o cargo pouco depois de assumir.'],
             ['Eduardo Pazuello', 'Saúde', 'Comandou a gestão da saúde durante o auge da pandemia.'],
+            ['Marcelo Queiroga', 'Saúde', 'Sucedeu Pazuello e permaneceu no cargo até o fim do governo.'],
             ['Sergio Moro', 'Justiça e Segurança Pública', 'Renunciou em 2020 após alegações de interferência política.'],
             ['Abraham Weintraub', 'Educação', 'Foi nomeado para a Educação após forte disputa política com universidades e órgãos da rede.']
         ],
@@ -171,10 +173,168 @@ const governments = [
             ['Fernando Haddad', 'Fazenda', 'Foi responsável por a articulação fiscal e pela reforma tributária.'],
             ['Camilo Santana', 'Educação', 'Comandou a pasta em um período de debate sobre acesso e formação.'],
             ['Nísia Trindade', 'Saúde', 'Primeira mulher a assumir o Ministério da Saúde na atual fase do governo.'],
+            ['Alexandre Padilha', 'Saúde', 'Assumiu a pasta em março de 2025, sucedendo Nísia Trindade.'],
             ['Marina Silva', 'Meio Ambiente', 'Foi indicada para fortalecer o tema ambiental e as políticas de desmatamento.']
         ],
         resultados: ['Reestruturação de ministérios e novas linhas de política social.', 'Retomada de ministérios de direito, cultura e direitos de grupos específicos.', 'O governo está em andamento e a avaliação final depende da consolidação do orçamento e das leis de execução.'],
         fonte: 'Lei de organização de ministérios e documentos oficiais do Executivo.'
+    }
+];
+
+const stfSucessoes = {
+    fhc: [
+        ['Francisco Rezek', 'Nelson Jobim', 1997],
+        ['Octavio Gallotti', 'Ellen Gracie', 2000],
+        ['Néri da Silveira', 'Gilmar Mendes', 2002]
+    ],
+    dilma: [
+        ['Ellen Gracie', 'Rosa Weber', 2011],
+        ['Ayres Britto', 'Teori Zavascki', 2012],
+        ['Joaquim Barbosa', 'Edson Fachin', 2015]
+    ],
+    temer: [
+        ['Teori Zavascki', 'Alexandre de Moraes', 2017]
+    ],
+    bolsonaro: [
+        ['Celso de Mello', 'Nunes Marques', 2020],
+        ['Marco Aurélio', 'André Mendonça', 2021]
+    ],
+    'lula-2023': [
+        ['Ricardo Lewandowski', 'Cristiano Zanin', 2023],
+        ['Rosa Weber', 'Flávio Dino', 2024]
+    ]
+};
+
+const scandals = [
+    {
+        government: 'fhc',
+        year: 1997,
+        title: 'Denúncias de compra de votos para a emenda da reeleição',
+        area: 'Presidência e Congresso',
+        status: 'Denúncias e controvérsia política',
+        detail: 'Gravações atribuídas a deputados federais deram origem a acusações de compra de votos durante a aprovação da emenda que permitiu a reeleição. O registro aqui é da controvérsia pública; não presume culpa de pessoas citadas.',
+        source: 'https://www.camara.leg.br/',
+        sourceLabel: 'Câmara dos Deputados — acervo e notícias'
+    },
+    {
+        government: 'lula-2003',
+        year: 2005,
+        title: 'Mensalão',
+        area: 'Presidência, partidos e Congresso',
+        status: 'Julgamento da Ação Penal 470 pelo STF',
+        detail: 'Denúncias de pagamentos a parlamentares para apoio político levaram à Ação Penal 470. O STF condenou réus específicos; a responsabilização deve ser atribuída conforme as decisões individuais, não indistintamente ao governo.',
+        source: 'https://portal.stf.jus.br/',
+        sourceLabel: 'STF — processos e decisões'
+    },
+    {
+        government: 'lula-2003',
+        year: 2006,
+        title: 'Máfia das Sanguessugas',
+        area: 'Ministérios da Saúde e parlamentares',
+        status: 'CPI e investigações',
+        detail: 'Investigações e a CPI apuraram fraudes em licitações e compra de ambulâncias com recursos de emendas parlamentares. O envolvimento e o desfecho variaram conforme cada investigado.',
+        source: 'https://www.camara.leg.br/',
+        sourceLabel: 'Câmara dos Deputados — CPIs e acervo'
+    },
+    {
+        government: 'dilma',
+        year: 2014,
+        title: 'Operação Lava Jato e desvios na Petrobras',
+        area: 'Estatal, partidos e agentes públicos',
+        status: 'Investigações e processos com desfechos distintos',
+        detail: 'A operação investigou contratos da Petrobras e pagamentos ilícitos. Houve condenações, decisões anuladas e processos encerrados; uma investigação ou acusação não equivale, por si só, a condenação válida.',
+        source: 'https://www.mpf.mp.br/grandes-casos/lava-jato',
+        sourceLabel: 'Ministério Público Federal — Lava Jato'
+    },
+    {
+        government: 'dilma',
+        year: 2015,
+        title: 'Operação Zelotes',
+        area: 'Conselho Administrativo de Recursos Fiscais (CARF)',
+        status: 'Investigação',
+        detail: 'A operação apurou suspeitas de influência e pagamento de vantagens indevidas em julgamentos de processos tributários no CARF. Os resultados dependem dos processos e das pessoas envolvidas.',
+        source: 'https://www.mpf.mp.br/',
+        sourceLabel: 'Ministério Público Federal — notícias e processos'
+    },
+    {
+        government: 'dilma',
+        year: 2016,
+        title: 'Impeachment e controvérsia das chamadas “pedaladas fiscais”',
+        area: 'Presidência e orçamento público',
+        status: 'Impeachment aprovado pelo Senado',
+        detail: 'O Senado condenou Dilma Rousseff por crime de responsabilidade relacionado a decretos orçamentários e atrasos em repasses a bancos públicos. O episódio é uma controvérsia político-jurídica, não uma condenação criminal por corrupção.',
+        source: 'https://www12.senado.leg.br/',
+        sourceLabel: 'Senado Federal — processo de impeachment'
+    },
+    {
+        government: 'temer',
+        year: 2017,
+        title: 'Gravação da JBS e denúncias contra Michel Temer',
+        area: 'Presidência e Ministério Público Federal',
+        status: 'Denúncias barradas pela Câmara dos Deputados',
+        detail: 'Após a divulgação de gravação de conversa com Joesley Batista, a Procuradoria-Geral da República denunciou Temer. A Câmara negou autorização para que as denúncias fossem julgadas durante o mandato; isso não corresponde a condenação.',
+        source: 'https://www.camara.leg.br/',
+        sourceLabel: 'Câmara dos Deputados — votações e notícias'
+    },
+    {
+        government: 'temer',
+        year: 2017,
+        title: 'R$ 51 milhões atribuídos a Geddel Vieira Lima',
+        area: 'Ministro da Secretaria de Governo',
+        status: 'Condenação criminal',
+        detail: 'O ex-ministro foi condenado no caso dos valores encontrados em um apartamento em Salvador. O registro se refere à situação judicial do ex-ministro, não a uma condenação do presidente.',
+        source: 'https://portal.stf.jus.br/',
+        sourceLabel: 'STF — decisões e processos'
+    },
+    {
+        government: 'bolsonaro',
+        year: 2020,
+        title: 'Acusações de interferência na Polícia Federal',
+        area: 'Presidência e Ministério da Justiça',
+        status: 'Inquérito e controvérsia institucional',
+        detail: 'A saída do ministro Sergio Moro foi acompanhada por acusações de tentativa de interferência na Polícia Federal, negadas por Bolsonaro. O episódio foi investigado e teve desdobramentos judiciais próprios.',
+        source: 'https://portal.stf.jus.br/',
+        sourceLabel: 'STF — inquéritos e decisões'
+    },
+    {
+        government: 'bolsonaro',
+        year: 2021,
+        title: 'CPI da Pandemia',
+        area: 'Presidência, Ministério da Saúde e órgãos públicos',
+        status: 'Relatório parlamentar com pedidos de indiciamento',
+        detail: 'A CPI investigou a resposta federal à pandemia, contratos e condutas de agentes públicos. O relatório final apresentou conclusões e pedidos de indiciamento; esses pedidos não são sentenças judiciais.',
+        source: 'https://www12.senado.leg.br/',
+        sourceLabel: 'Senado Federal — CPI da Pandemia'
+    },
+    {
+        government: 'bolsonaro',
+        year: 2022,
+        title: 'Presentes oficiais e joias recebidas no exterior',
+        area: 'Presidência e órgãos de fiscalização',
+        status: 'Investigação policial',
+        detail: 'A Polícia Federal investigou a entrada e a destinação de presentes recebidos em viagens oficiais. O registro descreve a investigação, sem tratar suspeitas ou indiciamentos como condenação definitiva.',
+        source: 'https://www.gov.br/pf/pt-br/assuntos/noticias',
+        sourceLabel: 'Polícia Federal — notícias e operações'
+    },
+    {
+        government: 'lula-2023',
+        year: 2023,
+        title: 'Atos de 8 de janeiro e investigações sobre tentativa de golpe',
+        area: 'Presidência, órgãos de segurança e STF',
+        status: 'Investigações e ações judiciais',
+        detail: 'A invasão e depredação das sedes dos Três Poderes levou a investigações e processos sobre os atos e sua organização. As responsabilidades são individuais e devem ser descritas conforme decisões judiciais.',
+        source: 'https://portal.stf.jus.br/',
+        sourceLabel: 'STF — ações penais e decisões'
+    },
+    {
+        government: 'lula-2023',
+        year: 2025,
+        title: 'Operação Sem Desconto: descontos associativos no INSS',
+        area: 'INSS, associações e órgãos de fiscalização',
+        status: 'Operação e investigação em andamento',
+        detail: 'A CGU e a Polícia Federal deflagraram operação para apurar descontos associativos não autorizados em benefícios previdenciários. A investigação trata de suspeitas e não estabelece, por si só, responsabilidade criminal de agentes do governo.',
+        source: 'https://www.gov.br/cgu/pt-br/assuntos/noticias',
+        sourceLabel: 'Controladoria-Geral da União — operação e apuração'
     }
 ];
 
@@ -205,7 +365,16 @@ function renderGovernments() {
 
         const stfNomeados = governo.stfNomeados.map(item => `<li>${item}</li>`).join('');
         const stfSaidas = governo.stfSaidas.map(item => `<li>${item}</li>`).join('');
-        const ministeriosList = governo.ministerios.map(item => `<li>${item}</li>`).join('');
+        const stfSucessoesList = (stfSucessoes[governo.id] || [])
+            .map(([anterior, sucessor, ano]) => `<li>${anterior} -> ${sucessor} (${ano})</li>`)
+            .join('');
+        const ministeriosList = governo.ministerios.map(ministerio => {
+            const titulares = governo.ministracoes
+                .filter(([, pasta]) => pasta.split(/\s+e\s+/).some(nome => nome === ministerio))
+                .map(([nome]) => nome);
+            const sucessao = titulares.length ? titulares.join(' -> ') : 'Titular não identificado no recorte atual';
+            return `<li><strong>${ministerio}</strong> · ${sucessao}</li>`;
+        }).join('');
         const criadosList = governo.criados.map(item => `<li>${item}</li>`).join('');
         const extintosList = governo.extintos.map(item => `<li>${item}</li>`).join('');
 
@@ -237,10 +406,14 @@ function renderGovernments() {
                         <ul>${stfSaidas}</ul>
                     </div>
                 </div>
+                <strong>Sucessões identificadas</strong>
+                <ul>${stfSucessoesList || '<li>Não há relação de sucessores confirmada neste recorte.</li>'}</ul>
+                <p class="data-note">Só são pareadas as sucessões confirmadas acima; as demais nomeações e saídas ficam separadas quando os dados desta página não permitem confirmar a troca.</p>
             </section>
 
             <section class="gov-section">
-                <h4>Ministérios existentes</h4>
+                <h4>Ministérios e titulares em destaque</h4>
+                <p class="data-note">A seta indica a ordem dos ministros identificados para a mesma pasta neste recorte; titulares intermediários podem estar ausentes. A relação não é a composição integral dos gabinetes.</p>
                 <ul>${ministeriosList}</ul>
             </section>
 
@@ -290,6 +463,68 @@ function renderGovernments() {
         list.querySelectorAll('.mandate-card').forEach(card => {
             const shouldShow = filter.value === 'all' || card.dataset.government === filter.value;
             card.hidden = !shouldShow;
+        });
+    });
+}
+
+function renderScandals() {
+    const list = document.getElementById('scandalList');
+    const filter = document.getElementById('scandalGovernmentFilter');
+
+    governments.forEach(governo => {
+        const option = document.createElement('option');
+        option.value = governo.id;
+        option.textContent = `${governo.president} · ${governo.years}`;
+        filter.appendChild(option);
+    });
+
+    scandals.forEach(item => {
+        const government = governments.find(({ id }) => id === item.government);
+        const card = document.createElement('article');
+        card.className = 'scandal-card';
+        card.dataset.government = item.government;
+        card.innerHTML = `
+            <div class="scandal-date">${item.year}</div>
+            <div class="scandal-content">
+                <p class="scandal-government">${government.president} · ${item.area}</p>
+                <h3>${item.title}</h3>
+                <p>${item.detail}</p>
+                <p class="scandal-status"><strong>Andamento/resultado registrado:</strong> ${item.status}</p>
+                <a href="${item.source}" target="_blank" rel="noopener">${item.sourceLabel} ↗</a>
+            </div>
+        `;
+        list.appendChild(card);
+    });
+
+    filter.addEventListener('change', () => {
+        list.querySelectorAll('.scandal-card').forEach(card => {
+            card.hidden = filter.value !== 'all' && card.dataset.government !== filter.value;
+        });
+    });
+}
+
+function setupTabs() {
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+
+    function activateTab(tab) {
+        tabs.forEach(item => {
+            const selected = item === tab;
+            item.setAttribute('aria-selected', String(selected));
+            item.tabIndex = selected ? 0 : -1;
+            document.getElementById(item.getAttribute('aria-controls')).hidden = !selected;
+        });
+    }
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activateTab(tab));
+        tab.addEventListener('keydown', event => {
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const nextIndex = event.key === 'Home' ? 0
+                : event.key === 'End' ? tabs.length - 1
+                    : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            tabs[nextIndex].focus();
+            activateTab(tabs[nextIndex]);
         });
     });
 }
@@ -353,4 +588,6 @@ function makeChart({ key, canvas, color, decimals }) {
 }
 
 renderGovernments();
+renderScandals();
+setupTabs();
 chartDefinitions.forEach(makeChart);
